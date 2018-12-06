@@ -57734,7 +57734,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n#lakviru-logo{\n\t/* width: 100%; */\n\tmax-width: 60%;\n}\n", ""]);
+exports.push([module.i, "\n#lakviru-logo{\n\t\t/* width: 100%; */\n\t\tmax-width: 60%;\n}\n#volumeValue{\n\n    margin-top: -30px;\n    padding-bottom: 25px;\n\tcolor: #B0BEC5;\n}\n", ""]);
 
 // exports
 
@@ -57815,7 +57815,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		return {
 			volume_value: 60,
 			button_icon: "play_arrow",
-			audio: undefined
+			audio: undefined,
+			playing: false,
+			color: "red",
+			inactive_color: "blue-grey lighten-3"
 		};
 	},
 
@@ -57824,12 +57827,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 			return Math.round(this.volume_value * 100);
 		},
-		color: function color() {
+		colors: function colors() {
 			if (this.volume_value < 30) return 'indigo';
 			if (this.volume_value < 50) return 'teal';
 			if (this.volume_value < 70) return 'green';
 			if (this.volume_value < 90) return 'orange';
 			return 'red';
+		}
+	},
+	watch: {
+		volume_value: function volume_value(value) {
+			if (this.playing) {
+				this.colorBaseValue(value);
+			} else {
+				this.color = this.inactive_color;
+			}
+		},
+		playing: function playing(value, oldVal) {
+			if (value) {}
 		}
 	},
 	mounted: function mounted() {
@@ -57839,6 +57854,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 	methods: {
+		colorBaseValue: function colorBaseValue(value) {
+			if (value > 90) {
+				this.color = "red accent-1";
+			} else if (value > 70) {
+				this.color = "teal";
+			} else if (value > 50) {
+				this.color = "green";
+			} else if (value > 30) {
+				this.color = "orange";
+			} else {
+				this.color = "indigo lighten-3";
+			}
+		},
 		volueChange: function volueChange() {
 			this.$refs.radio.volume = this.volume_value / 100;
 			// console.log(this.$refs.radio.volume);
@@ -57849,15 +57877,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			setTimeout(function () {
 				return _this.button_icon = "pause";
 			}, 1000);
+			this.playing = true;
+			this.colorBaseValue(this.volume_value);
+		},
+		clickForPlay: function clickForPlay() {
+			this.button_icon = "pause";
+			this.playing = true;
+			this.colorBaseValue(this.volume_value);
+		},
+		clickForPause: function clickForPause() {
+			this.button_icon = "play_arrow";
+			this.playing = false;
+			this.color = this.inactive_color;
 		},
 		mainControll: function mainControll() {
 			var a = this.$refs.radio;
 			if (a.paused) {
 				a.play();
-				this.button_icon = "pause";
+				this.clickForPlay();
 			} else {
 				a.pause();
-				this.button_icon = "play_arrow";
+				this.clickForPause();
 			}
 		},
 		increment: function increment() {
@@ -57940,10 +57980,6 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("P", { staticClass: "subheading" }, [
-                _vm._v("Volume: " + _vm._s(_vm.volume_value))
-              ]),
-              _vm._v(" "),
               _c(
                 "v-flex",
                 { attrs: { xs10: "", "offset-xs1": "" } },
@@ -57988,6 +58024,12 @@ var render = function() {
                       )
                     ],
                     1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "P",
+                    { staticClass: "subheading", attrs: { id: "volumeValue" } },
+                    [_vm._v("Volume: " + _vm._s(_vm.volume_value) + "%")]
                   )
                 ],
                 1
