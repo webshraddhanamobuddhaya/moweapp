@@ -3,7 +3,7 @@
         
         <div class="plyr__video-embed" id="player">
             <!-- <iframe :src="vLink" allowfullscreen allowtransparency allow="autoplay"></iframe> -->
-            <iframe :src="post.video_url" allowfullscreen allowtransparency allow="autoplay"></iframe>
+            <iframe :src="post.video_url" allowfullscreen allowtransparency allow="autoplay" fullscreen></iframe>
         </div>
 
         <v-layout row wrap>
