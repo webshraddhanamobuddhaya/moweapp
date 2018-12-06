@@ -39,13 +39,7 @@
 export default {
     data(){
         return {
-            posts:[
-                // {id:1, image_url:"https://cdn.vuetifyjs.com/images/cards/desert.jpg", post_title: "Name of the programe thats all"},
-                // {id:2, image_url:"https://cdn.vuetifyjs.com/images/cards/desert.jpg", post_title: "title 2: Name of the programe thats all"},
-                // {id:3, image_url:"https://cdn.vuetifyjs.com/images/cards/desert.jpg", post_title: "title 3: Name of the programe thats all"},
-                // {id:4, image_url:"https://cdn.vuetifyjs.com/images/cards/desert.jpg", post_title: "title 4: Name of the programe thats all"}
-            
-            ]
+            posts:[]
         }
     },
     mounted(){
@@ -57,7 +51,7 @@ export default {
     methods: {
         goToLink(id){
             console.log(id);
-            this.$router.push('/public/post/'+id);
+            this.$router.push('/post/'+id);
         }
     }
 }
