@@ -1,7 +1,7 @@
 <template>
 	<div id="radio">
 		<!-- <audio ref="radio" controls id="radio" autoplay v-show="false"> -->
-		<audio ref="radio" controls id="radio" autoplay v-show="false">
+		<audio ref="radio" controls id="radio" v-show="false">
 			<source src='http://69.46.24.226:7643/;'>
 		</audio>
 		
@@ -96,12 +96,25 @@ export default {
 			}
 
 		},
-		playing(value, oldVal){
-			if(value){}
+		playing(value){
+
 		}
 	},
 	mounted(){
-		
+		this.$refs.radio.load();
+		let playPromise = this.$refs.radio.play();
+		if (playPromise !== undefined) {
+			playPromise.then(_ => {
+			// Automatic playback started!
+			// Show playing UI.
+			console.log('start playing')
+			})
+			.catch(error => {
+			// Auto-play was prevented
+			// Show paused UI.
+			console.log(error)
+			});
+		}
 		this.changePlayButton();
 	},
 
@@ -115,11 +128,11 @@ export default {
 		},
 		volueChange(){
 			this.$refs.radio.volume = this.volume_value/100;
-			// console.log(this.$refs.radio.volume);
 		},
+		//Change play button to pause and do basic changes
 		changePlayButton(){
 			setTimeout(() => this.button_icon = "pause", 1000);
-			this.$refs.radio.play();
+			
 			this.playing = true;
 			this.colorBaseValue(this.volume_value);
 		},
@@ -140,9 +153,7 @@ export default {
 			if (a.paused) {
 				a.play();
 				this.clickForPlay();
-				
-				
-				
+	
 			} else {
 				a.pause();
 				this.clickForPause();
@@ -160,7 +171,6 @@ export default {
 
 <style>
 	#lakviru-logo{
-		/* width: 100%; */
 		max-width: 60%;
 	}
 	#volumeValue{

@@ -57734,7 +57734,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n#lakviru-logo{\n\t\t/* width: 100%; */\n\t\tmax-width: 60%;\n}\n#volumeValue{\n\n    margin-top: -30px;\n    padding-bottom: 25px;\n\tcolor: #B0BEC5;\n}\n", ""]);
+exports.push([module.i, "\n#lakviru-logo{\n\t\tmax-width: 60%;\n}\n#volumeValue{\n\n    margin-top: -30px;\n    padding-bottom: 25px;\n\tcolor: #B0BEC5;\n}\n", ""]);
 
 // exports
 
@@ -57817,7 +57817,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			button_icon: "play_arrow",
 			audio: undefined,
 			playing: false,
-			color: "red",
+			color: "blue-grey lighten-3",
 			inactive_color: "blue-grey lighten-3"
 		};
 	},
@@ -57843,12 +57843,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				this.color = this.inactive_color;
 			}
 		},
-		playing: function playing(value, oldVal) {
-			if (value) {}
-		}
+		playing: function playing(value) {}
 	},
 	mounted: function mounted() {
-		this.$refs.radio.play();
+		this.$refs.radio.load();
+		var playPromise = this.$refs.radio.play();
+		if (playPromise !== undefined) {
+			playPromise.then(function (_) {
+				// Automatic playback started!
+				// Show playing UI.
+				console.log('start playing');
+			}).catch(function (error) {
+				// Auto-play was prevented
+				// Show paused UI.
+				console.log(error);
+			});
+		}
 		this.changePlayButton();
 	},
 
@@ -57869,14 +57879,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		},
 		volueChange: function volueChange() {
 			this.$refs.radio.volume = this.volume_value / 100;
-			// console.log(this.$refs.radio.volume);
 		},
+
+		//Change play button to pause and do basic changes
 		changePlayButton: function changePlayButton() {
 			var _this = this;
 
 			setTimeout(function () {
 				return _this.button_icon = "pause";
 			}, 1000);
+
 			this.playing = true;
 			this.colorBaseValue(this.volume_value);
 		},
@@ -58533,7 +58545,8 @@ var render = function() {
             src: _vm.post.video_url,
             allowfullscreen: "",
             allowtransparency: "",
-            allow: "autoplay"
+            allow: "autoplay",
+            fullscreen: ""
           }
         })
       ]),
