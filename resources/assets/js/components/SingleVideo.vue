@@ -20,13 +20,8 @@
 </template>
 
 <script>
-import YT_Player from './YT_Player.vue';
+
 export default {
-    components:{
-        'video-player-embd': YT_Player
-    },
-        
-    
 	data(){
 		return {
             vLink: "https://www.youtube.com/embed/",
