@@ -1,7 +1,7 @@
 <template>
 	<div id="radio">
 		<!-- <audio ref="radio" controls id="radio" autoplay v-show="false"> -->
-		<audio ref="radio" controls id="radio" v-show="false">
+		<audio ref="radio" controls id="radio" autoplay v-show="false">
 			<source src='http://69.46.24.226:7643/;'>
 		</audio>
 		
