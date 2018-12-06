@@ -70,7 +70,7 @@ export default {
 			button_icon: "play_arrow",
 			audio: undefined,
 			playing: false,
-			color: "red",
+			color: "blue-grey lighten-3",
 			inactive_color: "blue-grey lighten-3"
 		}
 	},
@@ -101,7 +101,7 @@ export default {
 		}
 	},
 	mounted(){
-		this.$refs.radio.play();
+		
 		this.changePlayButton();
 	},
 
@@ -119,6 +119,7 @@ export default {
 		},
 		changePlayButton(){
 			setTimeout(() => this.button_icon = "pause", 1000);
+			this.$refs.radio.play();
 			this.playing = true;
 			this.colorBaseValue(this.volume_value);
 		},
