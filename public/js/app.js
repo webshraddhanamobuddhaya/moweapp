@@ -57901,7 +57901,11 @@ var render = function() {
               _c("div", [
                 _c("img", {
                   attrs: {
+<<<<<<< HEAD
                     src: "/images/lakviru.jpg",
+=======
+                    src: "/public/images/lakviru.jpg",
+>>>>>>> develop
                     alt: "Vuetify.js",
                     id: "lakviru-logo"
                   }
