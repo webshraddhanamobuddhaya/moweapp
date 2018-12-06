@@ -57807,16 +57807,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
 		return {
 			volume_value: 60,
-			button_icon: "pause",
-			au: this.radio2(),
-			audio: undefined,
-			playing1: true
+			button_icon: "play_arrow",
+			audio: undefined
 		};
 	},
 
@@ -57833,18 +57832,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			return 'red';
 		}
 	},
+	mounted: function mounted() {
+		this.$refs.radio.play();
+		this.changePlayButton();
+	},
+
 
 	methods: {
 		volueChange: function volueChange() {
-			this.$refs.audioButton.volume = this.volume_value / 100;
-			// console.log(this.$refs.audioButton.volume);
+			this.$refs.radio.volume = this.volume_value / 100;
+			// console.log(this.$refs.radio.volume);
 		},
-		radio2: function radio2() {
-			return this.$refs.audioButton;
+		changePlayButton: function changePlayButton() {
+			var _this = this;
+
+			setTimeout(function () {
+				return _this.button_icon = "pause";
+			}, 1000);
 		},
 		mainControll: function mainControll() {
-			var a = this.$refs.audioButton;
-			console.log(this.au);
+			var a = this.$refs.radio;
 			if (a.paused) {
 				a.play();
 				this.button_icon = "pause";
@@ -57885,8 +57892,8 @@ var render = function() {
               expression: "false"
             }
           ],
-          ref: "audioButton",
-          attrs: { controls: "", id: "radio", autoplay: "" }
+          ref: "radio",
+          attrs: { controls: "", id: "radio" }
         },
         [_c("source", { attrs: { src: "http://69.46.24.226:7643/;" } })]
       ),

@@ -1,6 +1,7 @@
 <template>
 	<div id="radio">
-		<audio ref="audioButton" controls id="radio" autoplay v-show="false">
+		<!-- <audio ref="radio" controls id="radio" autoplay v-show="false"> -->
+		<audio ref="radio" controls id="radio" v-show="false">
 			<source src='http://69.46.24.226:7643/;'>
 		</audio>
 		
@@ -66,10 +67,8 @@ export default {
 	data(){
 		return {
 			volume_value: 60,
-			button_icon: "pause",
-			au: this.radio2(),
+			button_icon: "play_arrow",
 			audio: undefined,
-			playing1: true
 		}
 	},
 	computed: {
@@ -85,18 +84,21 @@ export default {
 			return 'red'
 		}
 	},
+	mounted(){
+		this.$refs.radio.play();
+		this.changePlayButton();
+	},
 
 	methods:{
 		volueChange(){
-			this.$refs.audioButton.volume = this.volume_value/100;
-			// console.log(this.$refs.audioButton.volume);
+			this.$refs.radio.volume = this.volume_value/100;
+			// console.log(this.$refs.radio.volume);
 		},
-		radio2(){
-			return this.$refs.audioButton;
+		changePlayButton(){
+			setTimeout(() => this.button_icon = "pause", 1000);
 		},
 		mainControll(){
-			var a = this.$refs.audioButton;
-			console.log(this.au);
+			var a = this.$refs.radio;
 			if (a.paused) {
 				a.play();
 				this.button_icon = "pause";
