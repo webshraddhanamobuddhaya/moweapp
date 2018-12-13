@@ -43,7 +43,7 @@ export default {
         }
     },
     mounted(){
-        axios.get('/public/api/videos').then((response) => {
+        axios.get('/api/videos').then((response) => {
             this.posts = response.data;
             console.log(response);
         })

@@ -8,7 +8,7 @@
 		<v-flex xs12 sm6 offset-sm3>
 			<v-card>
 				<div >
-						<img src="/public/images/lakviru.jpg" alt="Vuetify.js" id="lakviru-logo">
+						<img src="/images/lakviru.jpg" alt="Vuetify.js" id="lakviru-logo">
 				</div>
 
 						
@@ -101,6 +101,7 @@ export default {
 		}
 	},
 	mounted(){
+		// audio("http://69.46.24.226:7643/;");
 		this.$refs.radio.load();
 		let playPromise = this.$refs.radio.play();
 		if (playPromise !== undefined) {

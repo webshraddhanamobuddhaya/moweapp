@@ -17,8 +17,12 @@ import VueRouter from 'vue-router'
 import VuePlyr from 'vue-plyr';
 import 'vue-plyr/dist/vue-plyr.css';
 import VueYouTubeEmbed from 'vue-youtube-embed'
+import Vuex from 'vuex'
+import 'es6-promise/auto'
 
 
+
+Vue.use(Vuex)
 Vue.use(VueYouTubeEmbed)
 Vue.use(VuePlyr)
 Vue.use(Vuetify)
