@@ -20,7 +20,7 @@
 </template>
 
 <script>
-
+import store from "../store/store";
 export default {
 	data(){
 		return {
@@ -34,6 +34,7 @@ export default {
     computed:{
         },
     created(){
+		store.dispatch("setNavTitle",'Single Video');
         let post_id = this.$route.params.id;
         let url = '/api/video/'+post_id;
             console.log(url);

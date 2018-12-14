@@ -46,8 +46,8 @@
 </template>
 
 <script>
-  import axios from 'axios'
-
+import axios from 'axios'
+import store from "../store/store";
   export default {
     data: () => ({
       valid: true,
@@ -72,7 +72,9 @@
       ]
 
     }),
-
+    created(){
+        store.dispatch("setNavTitle",'Send Your Message');
+    },
     methods: {
       submit () {
         if (this.$refs.form.validate()) {

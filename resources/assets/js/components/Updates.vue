@@ -11,6 +11,7 @@
         grid-list-lg
       > -->
         <v-layout row wrap justify-space-around>
+            <!-- <h2>status: {{statusText}}</h2> -->
           <v-flex xs12 sm5 v-for="post in posts" :key="post.id">
  
         <v-hover>
@@ -36,22 +37,30 @@
   </div>
 </template>
 <script>
+import store from "../store/store";
 export default {
     data(){
         return {
-            posts:[]
+            // posts:[]
         }
     },
-    mounted(){
-        axios.get('/api/videos').then((response) => {
-            this.posts = response.data;
-            console.log(response);
-        })
+    created(){
+        store.dispatch("getApiData");
+        store.dispatch("setNavTitle",'Latest Videos');
     },
+
     methods: {
         goToLink(id){
             console.log(id);
             this.$router.push('/post/'+id);
+        }
+    },
+    computed: {
+        statusText(){
+            return store.state.dataStatus;
+        },
+        posts(){
+            return store.state.updates;
         }
     }
 }

@@ -62,7 +62,7 @@
 </template>
 
 <script>
-	
+import store from "../store/store";
 export default {
 	data(){
 		return {
@@ -100,8 +100,10 @@ export default {
 
 		}
 	},
+	created(){
+		store.dispatch("setNavTitle",'Radio Live Stream');
+	},
 	mounted(){
-		// audio("http://69.46.24.226:7643/;");
 		this.$refs.radio.load();
 		let playPromise = this.$refs.radio.play();
 		if (playPromise !== undefined) {

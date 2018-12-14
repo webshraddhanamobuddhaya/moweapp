@@ -10,13 +10,16 @@
 </template>
 
 <script>
-	
+import store from "../store/store";
 export default {
 	data(){
 		return {
 			
 		}
-	}
+  },
+  created(){
+    store.dispatch("setNavTitle",'Live Video Streaming');
+  }
 }
 </script>
 

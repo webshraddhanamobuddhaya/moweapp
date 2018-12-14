@@ -1,11 +1,5 @@
 <template>
-  <v-app>
-    <v-content>
-          <v-container fluid>
-              <div class="headline text-xs-center">
-                <router-view></router-view>
-              </div>
-            <div class="footer">
+    <div class="footer">
 
               <v-bottom-nav
                 :value="true"
@@ -50,24 +44,13 @@
               </v-bottom-nav>
 
             </div>
-
-          </v-container>
-    </v-content>
-
-
-  </v-app>
 </template>
-
 <script>
 export default {
-  data () {
-    return {
-      
-    }
-  },
-  name: 'BaseApp'
+    name: 'FooterNav'
 }
 </script>
+
 <style>
 .footer {
     position: fixed;
