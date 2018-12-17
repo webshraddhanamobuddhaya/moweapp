@@ -1,19 +1,13 @@
 <template>
   <div
     id="e3"
-
-
   >
 
-    <!-- <v-card id="update-main-card"> -->
-      <!-- <v-container
-        fluid
-        grid-list-lg
-      > -->
         <v-layout row wrap justify-space-around>
+            <spiner-basic v-if="loading"></spiner-basic>
             <!-- <h2>status: {{statusText}}</h2> -->
-          <v-flex xs12 sm5 v-for="post in posts" :key="post.id">
- 
+          <v-flex xs12 sm5 v-for="post in posts" :key="post.id" v-if="!loading">
+              
         <v-hover>
             <v-card
             slot-scope="{ hover }"
@@ -61,6 +55,9 @@ export default {
         },
         posts(){
             return store.state.updates;
+        },
+        loading(){
+            return store.state.loading;
         }
     }
 }

@@ -8,7 +8,7 @@
                 fixed
               >
                 <v-btn
-                  color="teal"
+                  :color="baseColor"
                   flat
                   to="/"
                 >
@@ -17,7 +17,7 @@
                 </v-btn>
 
                 <v-btn
-                  color="teal"
+                  :color="baseColor"
                   flat
                   to="/tv"
                 >
@@ -26,7 +26,7 @@
                 </v-btn>
 
                 <v-btn
-                  color="teal"
+                  :color="baseColor"
                   flat
                   to="/radio"
                 >
@@ -34,7 +34,7 @@
                   <v-icon>radio</v-icon>
                 </v-btn>
                 <v-btn
-                  color="teal"
+                  :color="baseColor"
                   flat
                   to="/contact"
                 >
@@ -46,8 +46,15 @@
             </div>
 </template>
 <script>
+import store from '../../store/store.js'
 export default {
-    name: 'FooterNav'
+    name: 'FooterNav',
+    computed: {
+      baseColor(){
+            return store.state.baseColor;
+        }
+    }
+    
 }
 </script>
 

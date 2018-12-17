@@ -33,6 +33,7 @@ Vue.use(VueRouter)
 let routes = [{
         path: '/',
         component: require('./components/Updates.vue')
+        // component: require('./components/Loading.vue')
     },
     {
         path: '/tv',
@@ -74,6 +75,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
 Vue.component('app-header', require('./components/structure/HeaderNav.vue'));
 Vue.component('base-app', require('./components/structure/BaseApp.vue'));
 Vue.component('footer-nav', require('./components/structure/FooterNav.vue'));
+Vue.component('spiner-basic', require('./components/enhansments/Spiner.vue'));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

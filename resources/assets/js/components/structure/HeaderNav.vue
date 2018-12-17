@@ -1,10 +1,10 @@
 <template>
     <div class="app-head">
-         <v-navigation-drawer
-      fixed
-      v-model="drawer"
-      app
-    >
+      <!-- <v-navigation-drawer
+        fixed
+        v-model="drawer"
+        app
+      >
       <v-list dense>
         <v-list-tile @click="click">
           <v-list-tile-action>
@@ -23,9 +23,9 @@
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
-    </v-navigation-drawer>
-    <v-toolbar color="pink darken-3" dark fixed app id="navBar">
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+    </v-navigation-drawer> -->
+    <v-toolbar :color="baseColor" dark fixed app id="navBar">
+      <!-- <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon> -->
       <v-toolbar-title>{{navTitle}}</v-toolbar-title>
     </v-toolbar>
     </div>
@@ -49,7 +49,10 @@ export default {
     computed: {
       navTitle(){
         return store.state.navTitle;
-      }
+      },
+      baseColor(){
+            return store.state.baseColor;
+        }
     }
 }
 </script>

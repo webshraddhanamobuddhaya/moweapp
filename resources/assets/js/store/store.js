@@ -7,6 +7,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
+        baseColor: '#880E4F',
+        loading: true,
         dataStatus: 'int',
         navTitle: 'Shraddha Media Netwok',
         updates: [],
@@ -31,9 +33,12 @@ export default new Vuex.Store({
             state.dataStatus = 'loading';
         },
         getApiData(state){
-            axios.get('/api/videos').then((response) => {
-                state.updates = response.data;
-            })
+            if(state.loading){
+                axios.get('/api/videos').then((response) => {
+                    state.loading = false;
+                    state.updates = response.data;
+                });
+            }
         },
         setNavTitle(state,title){
             state.navTitle = title;
