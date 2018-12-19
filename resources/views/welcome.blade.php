@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Shraddha Mobile App') }}</title>
 
         <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
         <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
@@ -17,8 +17,7 @@
         
         <div id="app">
             <base-app></base-app>
-        </div>
-            
+        </div>  
         <script src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>

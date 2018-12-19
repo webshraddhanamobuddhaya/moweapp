@@ -18,6 +18,11 @@ import VuePlyr from 'vue-plyr';
 import 'vue-plyr/dist/vue-plyr.css';
 import VueYouTubeEmbed from 'vue-youtube-embed'
 
+// Import Vuex
+import store from './store/store'
+
+
+
 
 Vue.use(VueYouTubeEmbed)
 Vue.use(VuePlyr)
@@ -28,6 +33,7 @@ Vue.use(VueRouter)
 let routes = [{
         path: '/',
         component: require('./components/Updates.vue')
+        // component: require('./components/Loading.vue')
     },
     {
         path: '/tv',
@@ -64,7 +70,12 @@ const router = new VueRouter({
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
-Vue.component('base-app', require('./components/BaseApp.vue'));
+
+
+Vue.component('app-header', require('./components/structure/HeaderNav.vue'));
+Vue.component('base-app', require('./components/structure/BaseApp.vue'));
+Vue.component('footer-nav', require('./components/structure/FooterNav.vue'));
+Vue.component('spiner-basic', require('./components/enhansments/Spiner.vue'));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -74,5 +85,6 @@ Vue.component('base-app', require('./components/BaseApp.vue'));
 
 const app = new Vue({
     el: '#app',
+    store,
     router
 });

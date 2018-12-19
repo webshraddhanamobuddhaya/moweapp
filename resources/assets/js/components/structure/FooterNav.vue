@@ -1,11 +1,5 @@
 <template>
-  <v-app>
-    <v-content>
-          <v-container fluid>
-              <div class="headline text-xs-center">
-                <router-view></router-view>
-              </div>
-            <div class="footer">
+    <div class="footer">
 
               <v-bottom-nav
                 :value="true"
@@ -14,7 +8,7 @@
                 fixed
               >
                 <v-btn
-                  color="teal"
+                  :color="baseColor"
                   flat
                   to="/"
                 >
@@ -23,7 +17,7 @@
                 </v-btn>
 
                 <v-btn
-                  color="teal"
+                  :color="baseColor"
                   flat
                   to="/tv"
                 >
@@ -32,7 +26,7 @@
                 </v-btn>
 
                 <v-btn
-                  color="teal"
+                  :color="baseColor"
                   flat
                   to="/radio"
                 >
@@ -40,7 +34,7 @@
                   <v-icon>radio</v-icon>
                 </v-btn>
                 <v-btn
-                  color="teal"
+                  :color="baseColor"
                   flat
                   to="/contact"
                 >
@@ -50,24 +44,20 @@
               </v-bottom-nav>
 
             </div>
-
-          </v-container>
-    </v-content>
-
-
-  </v-app>
 </template>
-
 <script>
+import store from '../../store/store.js'
 export default {
-  data () {
-    return {
-      
+    name: 'FooterNav',
+    computed: {
+      baseColor(){
+            return store.state.baseColor;
+        }
     }
-  },
-  name: 'BaseApp'
+    
 }
 </script>
+
 <style>
 .footer {
     position: fixed;

@@ -1,18 +1,13 @@
 <template>
   <div
     id="e3"
-
-
   >
 
-    <!-- <v-card id="update-main-card"> -->
-      <!-- <v-container
-        fluid
-        grid-list-lg
-      > -->
         <v-layout row wrap justify-space-around>
-          <v-flex xs12 sm5 v-for="post in posts" :key="post.id">
- 
+            <spiner-basic v-if="loading"></spiner-basic>
+            <!-- <h2>status: {{statusText}}</h2> -->
+          <v-flex xs12 sm5 v-for="post in posts" :key="post.id" v-if="!loading">
+              
         <v-hover>
             <v-card
             slot-scope="{ hover }"
@@ -36,22 +31,33 @@
   </div>
 </template>
 <script>
+import store from "../store/store";
 export default {
     data(){
         return {
-            posts:[]
+            // posts:[]
         }
     },
-    mounted(){
-        axios.get('/public/api/videos').then((response) => {
-            this.posts = response.data;
-            console.log(response);
-        })
+    created(){
+        store.dispatch("getApiData");
+        store.dispatch("setNavTitle",'Latest Videos');
     },
+
     methods: {
         goToLink(id){
             console.log(id);
-            this.$router.push('/post/'+id);
+            this.$router.push('/public/post/'+id);
+        }
+    },
+    computed: {
+        statusText(){
+            return store.state.dataStatus;
+        },
+        posts(){
+            return store.state.updates;
+        },
+        loading(){
+            return store.state.loading;
         }
     }
 }
