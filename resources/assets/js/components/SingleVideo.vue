@@ -36,7 +36,7 @@ export default {
     created(){
 		store.dispatch("setNavTitle",'Single Video');
         let post_id = this.$route.params.id;
-        let url = '/api/video/'+post_id;
+        let url = '/public/api/video/'+post_id;
             console.log(url);
         axios.get(url).then((response) => {
             this.post = response.data;

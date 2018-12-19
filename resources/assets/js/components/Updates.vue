@@ -46,7 +46,7 @@ export default {
     methods: {
         goToLink(id){
             console.log(id);
-            this.$router.push('/post/'+id);
+            this.$router.push('/public/post/'+id);
         }
     },
     computed: {
