@@ -17,8 +17,7 @@
         
         <div id="app">
             <base-app></base-app>
-        </div>
-            
+        </div>  
         <script src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>

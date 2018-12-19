@@ -7,7 +7,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        baseColor: '#880E4F',
+        baseColor: '#D81B60',
         loading: true,
         dataStatus: 'int',
         navTitle: 'Shraddha Media Netwok',
