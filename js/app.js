@@ -835,7 +835,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
         },
         getApiData: function getApiData(state) {
             if (state.loading) {
-                axios.get('/api/videos').then(function (response) {
+                axios.get('/public/api/videos').then(function (response) {
                     state.loading = false;
                     state.updates = response.data;
                 });
@@ -60204,7 +60204,7 @@ var render = function() {
               _c("div", [
                 _c("img", {
                   attrs: {
-                    src: "/images/lakviru.jpg",
+                    src: "/public/images/lakviru.jpg",
                     alt: "Vuetify.js",
                     id: "lakviru-logo"
                   }

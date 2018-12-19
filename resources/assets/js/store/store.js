@@ -34,7 +34,7 @@ export default new Vuex.Store({
         },
         getApiData(state){
             if(state.loading){
-                axios.get('/public/api/videos').then((response) => {
+                axios.get('/api/videos').then((response) => {
                     state.loading = false;
                     state.updates = response.data;
                 });
