@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <!-- Application Header Navigation & Drawer -->
-    <app-header></app-header>
+
     <v-content >
       <v-container fluid>
         <div class="headline text-xs-center" id="contentSec">

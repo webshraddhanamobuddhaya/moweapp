@@ -61309,8 +61309,6 @@ var render = function() {
   return _c(
     "v-app",
     [
-      _c("app-header"),
-      _vm._v(" "),
       _c(
         "v-content",
         [
