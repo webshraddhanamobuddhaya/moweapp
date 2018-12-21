@@ -16,7 +16,9 @@ import Vuetify from 'vuetify'
 import VueRouter from 'vue-router'
 import VuePlyr from 'vue-plyr';
 import 'vue-plyr/dist/vue-plyr.css';
-import VueYouTubeEmbed from 'vue-youtube-embed'
+import VueYouTubeEmbed from 'vue-youtube-embed';
+import VueYoutube from 'vue-youtube'
+
 
 // Import Vuex
 import store from './store/store'
@@ -24,13 +26,16 @@ import store from './store/store'
 
 
 
+Vue.use(VueYoutube)
 Vue.use(VueYouTubeEmbed)
 Vue.use(VuePlyr)
 Vue.use(Vuetify)
 Vue.use(VueRouter)
 
 
-let routes = [{
+let routes = [
+
+    {
         path: '/',
         component: require('./components/Updates.vue')
         // component: require('./components/Loading.vue')

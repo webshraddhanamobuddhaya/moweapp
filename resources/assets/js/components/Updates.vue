@@ -46,7 +46,14 @@ export default {
     methods: {
         goToLink(id){
             console.log(id);
-            this.$router.push('/public/post/'+id);
+            this.$store.dispatch("getSingleVideoData", id);
+            store.dispatch("startLoading");
+            store.dispatch("getSinglePostData",id).then(response => {
+                console.log("Got some data, now lets show something in this component")
+                this.$router.push('/post/'+id);
+            }, error => {
+                console.error("Got nothing from server. Prompt user to check internet connection and try again")
+            });
         }
     },
     computed: {

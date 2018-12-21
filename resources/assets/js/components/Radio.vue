@@ -8,7 +8,7 @@
 		<v-flex xs12 sm6 offset-sm3>
 			<v-card>
 				<div >
-						<img src="/public/images/lakviru.jpg" alt="Vuetify.js" id="lakviru-logo">
+						<img src="/images/lakviru.jpg" alt="Vuetify.js" id="lakviru-logo">
 				</div>
 
 						
