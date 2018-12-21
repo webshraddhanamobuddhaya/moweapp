@@ -7,18 +7,37 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        baseColor: '#D81B60',
+        baseColor: '#009688',
         loading: true,
         dataStatus: 'int',
         navTitle: 'Shraddha Media Netwok',
         updates: [],
         singlePost:[],
-        videoUrlData:[]
+        videoUrlData:[],
+        liveStreamId: undefined
     },
     getters: {
 
     },
     actions: {
+        getTvLiveStreamingData({commit}){
+            commit("startLoading");
+
+            return new Promise((resolve, reject) => {
+                axios.get('/api/live_id').then(response => {
+                    // http success, call the mutator and change something in state
+                    let video_id = response.data.video_id;
+                    console.log("live id: "+video_id);
+                    commit('setLiveStreamId', video_id);
+                    commit("stopLoading");
+
+                    resolve(response); // Let the calling function know that http is done. You may send some data back
+                }, error => {
+                    // http failed, let the calling function know that action did not work out
+                    reject(error);
+                })
+            })
+        },
         startLoading({commit}){
             commit("startLoading");
         },
@@ -37,7 +56,7 @@ export default new Vuex.Store({
 
                     };
                     context.commit('setSingleVideoData', postData);
-                    context.commit("changeLoading");
+                    context.commit("stopLoading");
 
                     resolve(response); // Let the calling function know that http is done. You may send some data back
                 }, error => {
@@ -50,10 +69,11 @@ export default new Vuex.Store({
             context.commit('loadingApiData');
         },
         getApiData({state,commit}){
-             if (state.loading) {
+             if (state.updates.length==0) {
+                 commit("startLoading");
                  axios.get('/api/videos').then((response) => {
                      commit("setApiData",response.data);
-                     commit("changeLoading");
+                     commit("stopLoading");
 
                      let responseData = response.data;
                      let videoUrlData = responseData.map(urlData => {
@@ -89,6 +109,9 @@ export default new Vuex.Store({
         }
     },
     mutations: {
+        setLiveStreamId(state, live_id){
+            state.liveStreamId = live_id;
+        },
         startLoading(state) {
             state.loading = true;
         },
@@ -104,7 +127,7 @@ export default new Vuex.Store({
         setApiData(state, data){
             state.updates = data;
         },
-        changeLoading(state){
+        stopLoading(state){
             state.loading = false;
         },
         setNavTitle(state,title){

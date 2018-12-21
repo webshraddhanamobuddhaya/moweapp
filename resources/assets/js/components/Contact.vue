@@ -5,7 +5,7 @@
             <v-text-field
                 v-model="name"
                 :rules="nameRules"
-                :counter="10"
+                :counter="20"
                 label="Your Name"
                 required
             ></v-text-field>
@@ -96,5 +96,7 @@ import store from "../store/store";
 <style>
 #message-card{
     padding:15px;
+    padding-bottom:50px;
+    margin-bottom: 200px;
 }
 </style>

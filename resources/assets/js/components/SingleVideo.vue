@@ -44,19 +44,7 @@ export default {
         },
         video_id(){
             return store.state.singlePost.video_id;
-            // let video_postId = store.state.singlePost.post_id;
-            // let videoData = store.state.videoUrlData;
-            // for(var x in videoData ){
-            //     if(Object.keys(videoData[x])==video_postId){
-            //         var video_url1 = Object.values(videoData[x])[0];
-            //         console.log(Object.values(videoData[x]));
-            //         return video_url1.replace('https://www.youtube.com/embed/', '');
-            //     }
-            
-
-            // }
-
-        },
+         },
 
     },
     created(){

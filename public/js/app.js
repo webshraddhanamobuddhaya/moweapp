@@ -812,18 +812,39 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     state: {
-        baseColor: '#D81B60',
+        baseColor: '#009688',
         loading: true,
         dataStatus: 'int',
         navTitle: 'Shraddha Media Netwok',
         updates: [],
         singlePost: [],
-        videoUrlData: []
+        videoUrlData: [],
+        liveStreamId: undefined
     },
     getters: {},
     actions: {
-        startLoading: function startLoading(_ref) {
+        getTvLiveStreamingData: function getTvLiveStreamingData(_ref) {
             var commit = _ref.commit;
+
+            commit("startLoading");
+
+            return new Promise(function (resolve, reject) {
+                axios.get('/api/live_id').then(function (response) {
+                    // http success, call the mutator and change something in state
+                    var video_id = response.data.video_id;
+                    console.log("live id: " + video_id);
+                    commit('setLiveStreamId', video_id);
+                    commit("stopLoading");
+
+                    resolve(response); // Let the calling function know that http is done. You may send some data back
+                }, function (error) {
+                    // http failed, let the calling function know that action did not work out
+                    reject(error);
+                });
+            });
+        },
+        startLoading: function startLoading(_ref2) {
+            var commit = _ref2.commit;
 
             commit("startLoading");
         },
@@ -842,7 +863,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 
                     };
                     context.commit('setSingleVideoData', postData);
-                    context.commit("changeLoading");
+                    context.commit("stopLoading");
 
                     resolve(response); // Let the calling function know that http is done. You may send some data back
                 }, function (error) {
@@ -854,14 +875,15 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
         loadingData: function loadingData(context) {
             context.commit('loadingApiData');
         },
-        getApiData: function getApiData(_ref2) {
-            var state = _ref2.state,
-                commit = _ref2.commit;
+        getApiData: function getApiData(_ref3) {
+            var state = _ref3.state,
+                commit = _ref3.commit;
 
-            if (state.loading) {
+            if (state.updates.length == 0) {
+                commit("startLoading");
                 axios.get('/api/videos').then(function (response) {
                     commit("setApiData", response.data);
-                    commit("changeLoading");
+                    commit("stopLoading");
 
                     var responseData = response.data;
                     var videoUrlData = responseData.map(function (urlData) {
@@ -893,6 +915,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
         }
     },
     mutations: {
+        setLiveStreamId: function setLiveStreamId(state, live_id) {
+            state.liveStreamId = live_id;
+        },
         startLoading: function startLoading(state) {
             state.loading = true;
         },
@@ -908,7 +933,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
         setApiData: function setApiData(state, data) {
             state.updates = data;
         },
-        changeLoading: function changeLoading(state) {
+        stopLoading: function stopLoading(state) {
             state.loading = false;
         },
         setNavTitle: function setNavTitle(state, title) {
@@ -61101,6 +61126,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -61131,6 +61167,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     computed: {
+        baseColor: function baseColor() {
+            return __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].state.baseColor;
+        },
         statusText: function statusText() {
             return __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].state.dataStatus;
         },
@@ -61185,7 +61224,35 @@ var render = function() {
                                 }
                               },
                               [
-                                _c("v-img", { attrs: { src: post.image_url } }),
+                                _c(
+                                  "v-img",
+                                  { attrs: { src: post.image_url } },
+                                  [
+                                    _c(
+                                      "v-layout",
+                                      {
+                                        attrs: {
+                                          slot: "placeholder",
+                                          "fill-height": "",
+                                          "align-center": "",
+                                          "justify-center": "",
+                                          "ma-0": ""
+                                        },
+                                        slot: "placeholder"
+                                      },
+                                      [
+                                        _c("v-progress-circular", {
+                                          attrs: {
+                                            indeterminate: "",
+                                            color: _vm.baseColor
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                ),
                                 _vm._v(" "),
                                 _c("p", { staticClass: "body-1" }, [
                                   _vm._v(_vm._s(post.post_title))
@@ -61305,7 +61372,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\niframe {\n  width: 100%;\n}\n", ""]);
+exports.push([module.i, "\niframe {\n  width: 100%;\n}\n#shraddha_tv-logo{\n\t\tmax-width: 60%;\n}\n#add-card{\n  margin-top: 25px;\n}\n", ""]);
 
 // exports
 
@@ -61337,6 +61404,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -61348,8 +61425,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     };
   },
+
+  computed: {
+    loading: function loading() {
+      return __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].state.loading;
+    },
+    video_id: function video_id() {
+      return __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].state.liveStreamId;
+    }
+  },
   created: function created() {
     __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].dispatch("setNavTitle", 'Live Video Streaming');
+    // store.dispatch("getTvLiveStreamingData");
+    if (__WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].state.liveStreamId == undefined) {
+      __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].dispatch("getTvLiveStreamingData");
+    }
   },
 
   methods: {
@@ -61370,25 +61460,44 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("vue-plyr", [
-        _c("div", { staticClass: "plyr__video-embed" }, [
-          _c("iframe", {
-            attrs: {
-              src: "https://www.youtube.com/embed/CqnPcJZr1RQ",
-              allowfullscreen: "",
-              allowtransparency: "",
-              allow: "autoplay"
-            }
-          })
-        ])
-      ]),
+      _vm.loading ? _c("spiner-basic") : _vm._e(),
       _vm._v(" "),
-      _c(
-        "v-layout",
-        { attrs: { row: "", wrap: "" } },
-        [_c("v-flex", { attrs: { xs12: "" } })],
-        1
-      )
+      !_vm.loading
+        ? _c(
+            "v-layout",
+            { attrs: { row: "", wrap: "" } },
+            [
+              _c(
+                "v-flex",
+                { attrs: { xs12: "" } },
+                [
+                  _c("vue-plyr", [
+                    _c("div", {
+                      attrs: {
+                        "data-plyr-provider": "youtube",
+                        "data-plyr-embed-id": _vm.video_id
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("v-card", { attrs: { id: "add-card" } }, [
+                    _c("img", {
+                      attrs: {
+                        src: "/images/shraddha_tv.jpg",
+                        alt: "Vuetify.js",
+                        id: "shraddha_tv-logo"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("div")
+                  ])
+                ],
+                1
+              )
+            ],
+            1
+          )
+        : _vm._e()
     ],
     1
   )
@@ -61911,7 +62020,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n#message-card{\n    padding:15px;\n}\n", ""]);
+exports.push([module.i, "\n#message-card{\n    padding:15px;\n    padding-bottom:50px;\n    margin-bottom: 200px;\n}\n", ""]);
 
 // exports
 
@@ -62060,7 +62169,7 @@ var render = function() {
               _c("v-text-field", {
                 attrs: {
                   rules: _vm.nameRules,
-                  counter: 10,
+                  counter: 20,
                   label: "Your Name",
                   required: ""
                 },
@@ -62288,17 +62397,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         video_id: function video_id() {
             return __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].state.singlePost.video_id;
-            // let video_postId = store.state.singlePost.post_id;
-            // let videoData = store.state.videoUrlData;
-            // for(var x in videoData ){
-            //     if(Object.keys(videoData[x])==video_postId){
-            //         var video_url1 = Object.values(videoData[x])[0];
-            //         console.log(Object.values(videoData[x]));
-            //         return video_url1.replace('https://www.youtube.com/embed/', '');
-            //     }
-
-
-            // }
         }
     },
     created: function created() {

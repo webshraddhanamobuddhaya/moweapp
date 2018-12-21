@@ -18,7 +18,18 @@
                 <v-img
                     :src="post.image_url"
 
-                ></v-img>
+                >
+                                    <v-layout
+                      slot="placeholder"
+                      fill-height
+                      align-center
+                      justify-center
+                      ma-0
+                    >
+                      <v-progress-circular indeterminate :color="baseColor"></v-progress-circular>
+                    </v-layout>
+                
+                </v-img>
               <p class="body-1">{{post.post_title}}</p>
             </v-card>  
         </v-hover>
@@ -57,6 +68,9 @@ export default {
         }
     },
     computed: {
+        baseColor(){
+            return store.state.baseColor;
+        },
         statusText(){
             return store.state.dataStatus;
         },
