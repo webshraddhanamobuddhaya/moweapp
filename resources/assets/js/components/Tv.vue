@@ -33,7 +33,8 @@ import store from "../store/store";
 export default {
 	data(){
 		return {
-			videoId: 'lG0Ys-2d4MA',
+      videoId: 'lG0Ys-2d4MA',
+      pause: undefined,
       playerVars: {
         autoplay: 1
       }
@@ -51,9 +52,19 @@ export default {
     store.dispatch("setNavTitle",'Live Video Streaming');
     // store.dispatch("getTvLiveStreamingData");
     if(store.state.liveStreamId == undefined){
-      store.dispatch("getTvLiveStreamingData");
+      store.dispatch("getTvLiveStreamingData").then(response => {
+        // Stop Radio
+        // store.dispatch("stopRadio");
+        }, error => {
+          console.error("Error from getting livestream Id: " + error)
+            });
 
+    }else{
+      // Stop Radio
+    store.dispatch("stopRadio");
+      
     }
+
   },
   methods: {
     playing() {

@@ -819,12 +819,44 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
         updates: [],
         singlePost: [],
         videoUrlData: [],
-        liveStreamId: undefined
+        liveStreamId: undefined,
+        radio_volume: .6,
+        radioPlaying: false,
+        radio: undefined
     },
     getters: {},
     actions: {
-        getTvLiveStreamingData: function getTvLiveStreamingData(_ref) {
-            var commit = _ref.commit;
+        changeRadioVolume: function changeRadioVolume(_ref, value) {
+            var state = _ref.state,
+                commit = _ref.commit;
+
+            state.radio.volume = value;
+            commit("changeRadioVolume", value);
+        },
+        initRadio: function initRadio(_ref2) {
+            var commit = _ref2.commit;
+
+            commit("initRadio");
+        },
+        stopRadio: function stopRadio(_ref3) {
+            var commit = _ref3.commit,
+                state = _ref3.state;
+
+            state.radio.pause();
+            commit("stopRadio");
+        },
+        playRadio: function playRadio(_ref4) {
+            var commit = _ref4.commit,
+                state = _ref4.state;
+
+            if (!state.radioPlaying) {
+                state.radio.play();
+                state.radio.volume = state.radio_volume;
+                commit("startRadio");
+            }
+        },
+        getTvLiveStreamingData: function getTvLiveStreamingData(_ref5) {
+            var commit = _ref5.commit;
 
             commit("startLoading");
 
@@ -843,8 +875,8 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
                 });
             });
         },
-        startLoading: function startLoading(_ref2) {
-            var commit = _ref2.commit;
+        startLoading: function startLoading(_ref6) {
+            var commit = _ref6.commit;
 
             commit("startLoading");
         },
@@ -875,9 +907,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
         loadingData: function loadingData(context) {
             context.commit('loadingApiData');
         },
-        getApiData: function getApiData(_ref3) {
-            var state = _ref3.state,
-                commit = _ref3.commit;
+        getApiData: function getApiData(_ref7) {
+            var state = _ref7.state,
+                commit = _ref7.commit;
 
             if (state.updates.length == 0) {
                 commit("startLoading");
@@ -915,6 +947,19 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
         }
     },
     mutations: {
+        changeRadioVolume: function changeRadioVolume(state, value) {
+            state.radio_volume = value;
+        },
+        initRadio: function initRadio(state) {
+            state.radio = new Audio('http://69.46.24.226:7643/;');
+        },
+        stopRadio: function stopRadio(state) {
+            state.radioPlaying = false;
+            state.radio = new Audio('http://69.46.24.226:7643/;');
+        },
+        startRadio: function startRadio(state) {
+            state.radioPlaying = true;
+        },
         setLiveStreamId: function setLiveStreamId(state, live_id) {
             state.liveStreamId = live_id;
         },
@@ -61156,11 +61201,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             console.log(id);
-            this.$store.dispatch("getSingleVideoData", id);
+            // this.$store.dispatch("getSingleVideoData", id);
             __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].dispatch("startLoading");
             __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].dispatch("getSinglePostData", id).then(function (response) {
                 console.log("Got some data, now lets show something in this component");
                 _this.$router.push('/post/' + id);
+
+                // Stop the radio
+                // store.dispatch("stopRadio");
             }, function (error) {
                 console.error("Got nothing from server. Prompt user to check internet connection and try again");
             });
@@ -61420,6 +61468,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       videoId: 'lG0Ys-2d4MA',
+      pause: undefined,
       playerVars: {
         autoplay: 1
       }
@@ -61438,7 +61487,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].dispatch("setNavTitle", 'Live Video Streaming');
     // store.dispatch("getTvLiveStreamingData");
     if (__WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].state.liveStreamId == undefined) {
-      __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].dispatch("getTvLiveStreamingData");
+      __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].dispatch("getTvLiveStreamingData").then(function (response) {
+        // Stop Radio
+        // store.dispatch("stopRadio");
+      }, function (error) {
+        console.error("Error from getting livestream Id: " + error);
+      });
+    } else {
+      // Stop Radio
+      __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].dispatch("stopRadio");
     }
   },
 
@@ -61714,20 +61771,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		__WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].dispatch("setNavTitle", 'Radio Live Stream');
 	},
 	mounted: function mounted() {
-		this.$refs.radio.load();
-		var playPromise = this.$refs.radio.play();
-		if (playPromise !== undefined) {
-			playPromise.then(function (_) {
-				// Automatic playback started!
-				// Show playing UI.
-				console.log('start playing');
-			}).catch(function (error) {
-				// Auto-play was prevented
-				// Show paused UI.
-				console.log(error);
-			});
-		}
-		this.changePlayButton();
+		// this.colorBaseValue(this.volume_value);
+		// this.$refs.radio.load();
+		// let playPromise = this.$refs.radio.play();
+		// if (playPromise !== undefined) {
+		// 	playPromise.then(_ => {
+
+		// 	console.log('start playing')
+		// 	})
+		// 	.catch(error => {
+
+		// 	console.log(error)
+		// 	});
+		// }
+		// this.changePlayButton();
 	},
 
 

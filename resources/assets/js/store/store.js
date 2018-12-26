@@ -14,12 +14,33 @@ export default new Vuex.Store({
         updates: [],
         singlePost:[],
         videoUrlData:[],
-        liveStreamId: undefined
+        liveStreamId: undefined,
+        radio_volume: .6,
+        radioPlaying: false,
+        radio: undefined,
     },
     getters: {
 
     },
     actions: {
+        changeRadioVolume({state,commit}, value){
+            state.radio.volume = value;
+            commit("changeRadioVolume",value);
+        },
+        initRadio({commit}){
+            commit("initRadio");
+        },
+        stopRadio({commit,state}){
+            state.radio.pause();
+            commit("stopRadio");
+        },
+        playRadio({commit,state}){
+            if(!state.radioPlaying){
+                state.radio.play();
+                state.radio.volume = state.radio_volume;
+                commit("startRadio");
+            }
+        },
         getTvLiveStreamingData({commit}){
             commit("startLoading");
 
@@ -109,6 +130,20 @@ export default new Vuex.Store({
         }
     },
     mutations: {
+        changeRadioVolume(state,value){
+            state.radio_volume = value;
+        },
+        initRadio(state){
+            state.radio = new Audio('http://69.46.24.226:7643/;');
+        },
+        stopRadio(state){
+            state.radioPlaying = false;
+            state.radio = new Audio('http://69.46.24.226:7643/;');
+        },
+        startRadio(state){
+            state.radioPlaying = true;
+
+        },
         setLiveStreamId(state, live_id){
             state.liveStreamId = live_id;
         },
