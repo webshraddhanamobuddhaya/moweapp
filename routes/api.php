@@ -16,6 +16,8 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/videos', 'VideoController@allVideos');
-Route::get('/video/{id}', 'VideoController@video');
+Route::get('/videos', 'Video\VideoController@allVideos');
+Route::get('/video/{id}', 'Video\VideoController@video');
+
+Route::get('/live_id', 'Video\LiveStreamController@liveID');
 

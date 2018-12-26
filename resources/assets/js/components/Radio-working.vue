@@ -1,13 +1,9 @@
 <template>
 	<div id="radio">
-		<audio ref="radio" controls id="radio" v-show="false">
-			<source src='http://69.46.24.226:7643/;'>
-		</audio>
-		
 		<v-flex xs12 sm6 offset-sm3>
 			<v-card>
 				<div >
-						<img src="/images/lakviru.jpg" alt="Vuetify.js" id="lakviru-logo">
+						<img src="/images/lakviru.jpg" alt="Lakviru Radio" id="lakviru-logo">
 				</div>
 
 						
@@ -67,13 +63,13 @@ export default {
 		return {
 			volume_value: 60,
 			button_icon: "play_arrow",
-			audio: undefined,
-			playing: false,
+
 			color: "blue-grey lighten-3",
 			inactive_color: "blue-grey lighten-3"
 		}
 	},
 	computed: {
+
 		volumeDisplay(){
 	
 			return Math.round(this.volume_value*100);
@@ -100,24 +96,13 @@ export default {
 		}
 	},
 	created(){
-		store.dispatch("setNavTitle",'Radio Live Stream');
+		// store.dispatch("setNavTitle",'Radio Live Stream');
+		store.dispatch("initRadio");
+
 	},
 	mounted(){
-		this.$refs.radio.load();
-		let playPromise = this.$refs.radio.play();
-		if (playPromise !== undefined) {
-			playPromise.then(_ => {
-			// Automatic playback started!
-			// Show playing UI.
-			console.log('start playing')
-			})
-			.catch(error => {
-			// Auto-play was prevented
-			// Show paused UI.
-			console.log(error)
-			});
-		}
-		this.changePlayButton();
+
+		this.colorBaseValue(this.volume_value);
 	},
 
 	methods:{
@@ -129,15 +114,11 @@ export default {
 				else{this.color = "indigo lighten-3"}
 		},
 		volueChange(){
-			this.$refs.radio.volume = this.volume_value/100;
+			// this.$refs.radio.volume = this.volume_value/100;
+			store.dispatch("changeRadioVolume",this.volume_value/100);
+
 		},
-		//Change play button to pause and do basic changes
-		changePlayButton(){
-			setTimeout(() => this.button_icon = "pause", 1000);
-			
-			this.playing = true;
-			this.colorBaseValue(this.volume_value);
-		},
+
 		clickForPlay(){
 			this.button_icon = "pause";
 			this.playing = true;
@@ -151,13 +132,12 @@ export default {
 
 		},
 		mainControll(){
-			var a = this.$refs.radio;
-			if (a.paused) {
-				a.play();
+			if (!store.state.radioPlaying) {
+				store.dispatch("playRadio");
 				this.clickForPlay();
 	
 			} else {
-				a.pause();
+				store.dispatch("stopRadio");
 				this.clickForPause();
 			}
 		},

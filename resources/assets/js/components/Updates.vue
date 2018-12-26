@@ -18,7 +18,18 @@
                 <v-img
                     :src="post.image_url"
 
-                ></v-img>
+                >
+                                    <v-layout
+                      slot="placeholder"
+                      fill-height
+                      align-center
+                      justify-center
+                      ma-0
+                    >
+                      <v-progress-circular indeterminate :color="baseColor"></v-progress-circular>
+                    </v-layout>
+                
+                </v-img>
               <p class="body-1">{{post.post_title}}</p>
             </v-card>  
         </v-hover>
@@ -46,10 +57,23 @@ export default {
     methods: {
         goToLink(id){
             console.log(id);
-            this.$router.push('/public/post/'+id);
+            // this.$store.dispatch("getSingleVideoData", id);
+            store.dispatch("startLoading");
+            store.dispatch("getSinglePostData",id).then(response => {
+                console.log("Got some data, now lets show something in this component")
+                this.$router.push('/post/'+id);
+
+                // Stop the radio
+                // store.dispatch("stopRadio");
+            }, error => {
+                console.error("Got nothing from server. Prompt user to check internet connection and try again")
+            });
         }
     },
     computed: {
+        baseColor(){
+            return store.state.baseColor;
+        },
         statusText(){
             return store.state.dataStatus;
         },

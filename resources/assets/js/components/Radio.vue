@@ -104,21 +104,20 @@ export default {
 		store.dispatch("setNavTitle",'Radio Live Stream');
 	},
 	mounted(){
-		this.$refs.radio.load();
-		let playPromise = this.$refs.radio.play();
-		if (playPromise !== undefined) {
-			playPromise.then(_ => {
-			// Automatic playback started!
-			// Show playing UI.
-			console.log('start playing')
-			})
-			.catch(error => {
-			// Auto-play was prevented
-			// Show paused UI.
-			console.log(error)
-			});
-		}
-		this.changePlayButton();
+		// this.colorBaseValue(this.volume_value);
+		// this.$refs.radio.load();
+		// let playPromise = this.$refs.radio.play();
+		// if (playPromise !== undefined) {
+		// 	playPromise.then(_ => {
+
+		// 	console.log('start playing')
+		// 	})
+		// 	.catch(error => {
+
+		// 	console.log(error)
+		// 	});
+		// }
+		// this.changePlayButton();
 	},
 
 	methods:{
