@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Video;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Config;
 
 class LiveStreamController extends Controller
 {
     public function liveID(){
 
         // return "ok";
-        $url = "https://www.shraddha.lk/stvapi/public/live_id";
+        $url = Config::get('apiconfig.apiBaseUrl')."live_id";
 
         $client = new \GuzzleHttp\Client();
         $request = $client->get($url);

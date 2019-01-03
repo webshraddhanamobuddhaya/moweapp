@@ -23,6 +23,7 @@
 
         <v-btn :disabled="!valid" @click="submit">submit</v-btn>
         <v-btn @click="clear">clear</v-btn>
+        <v-btn @click="alert">alert</v-btn>
       </v-form>
     </v-card>
   </v-flex>
@@ -59,16 +60,61 @@ export default {
     submit() {
       if (this.$refs.form.validate()) {
         // Native form submission is not yet supported
-        axios.post("/api/submit", {
-          name: this.name,
-          email: this.email,
-          select: this.select,
-          checkbox: this.checkbox
-        });
+
+        store.dispatch("sendMessage", {
+                name: this.name,
+                email: this.email,
+                subject: this.subject,
+                message: this.message
+        } );
+        // return new Promise((resolve, reject) => {
+        //         axios.post("/api/submit", {
+        //             name: this.name,
+        //             email: this.email,
+        //             subject: this.subject,
+        //             message: this.message
+        //           }).then((response) => {
+        //             console.log(response.data.success);
+        //             if(response.data.success){
+        //               this.alert();
+        //               console.log("OK...: "+response.data.success);
+        //             }else{
+        //               console.log("fail: "+response.data.success);
+
+        //             }
+                  
+        //             resolve(response); // Let the calling function know that http is done. You may send some data back
+        //         }, error => {
+        //             // http failed, let the calling function know that action did not work out
+        //             reject(error);
+        //         })
+        //     });
+
+
+
+
+
+
+        // axios.post("/api/submit", {
+        //   name: this.name,
+        //   email: this.email,
+        //   subject: this.subject,
+        //   message: this.message
+        // }).then((response) => {
+        //   console.log(response.data.success);
+        // });
       }
     },
     clear() {
       this.$refs.form.reset();
+    },
+    alert(){
+      this.$swal({
+          type: 'success',
+          title: 'The Message has been sent',
+          showConfirmButton: false,
+          timer: 1700
+        });
     }
   }
 };

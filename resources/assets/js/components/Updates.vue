@@ -6,7 +6,7 @@
         <v-layout row wrap justify-space-around>
             <spiner-basic v-if="loading"></spiner-basic>
             <!-- <h2>status: {{statusText}}</h2> -->
-          <v-flex xs12 sm5 v-for="post in posts" :key="post.id" v-if="!loading">
+          <v-flex xs12 sm5 pt-3 v-for="post in posts" :key="post.id" v-if="!loading">
               
         <v-hover>
             <v-card
@@ -30,7 +30,7 @@
                     </v-layout>
                 
                 </v-img>
-              <p class="body-1">{{post.post_title}}</p>
+              <p class="subheading">{{post.post_title}}</p>
             </v-card>  
         </v-hover>
           </v-flex>

@@ -18,6 +18,7 @@ import VuePlyr from 'vue-plyr';
 import 'vue-plyr/dist/vue-plyr.css';
 import VueYouTubeEmbed from 'vue-youtube-embed';
 import VueYoutube from 'vue-youtube'
+import VueSweetalert2 from 'vue-sweetalert2';
 
 
 // Import Vuex
@@ -26,6 +27,7 @@ import store from './store/store'
 
 
 
+Vue.use(VueSweetalert2);
 Vue.use(VueYoutube)
 Vue.use(VueYouTubeEmbed)
 Vue.use(VuePlyr)

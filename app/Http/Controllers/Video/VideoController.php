@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Video;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Config;
 
 class VideoController extends Controller
 {
@@ -11,7 +12,7 @@ class VideoController extends Controller
         // $link = 'latest_videos';
         // $url = "https://www.shraddha.lk/stvapi/public/$link";
 
-        $url = "https://www.shraddha.lk/stvapi/public/latest_videos";
+        $url = Config::get('apiconfig.apiBaseUrl')."latest_videos";
 
         $client = new \GuzzleHttp\Client();
         $request = $client->get($url);
@@ -26,7 +27,7 @@ class VideoController extends Controller
     }
 
     public function video($id){
-        $url = "https://www.shraddha.lk/stvapi/public/video/$id";
+        $url = Config::get('apiconfig.apiBaseUrl')."video/$id";
 
         $client = new \GuzzleHttp\Client();
         $request = $client->get($url);

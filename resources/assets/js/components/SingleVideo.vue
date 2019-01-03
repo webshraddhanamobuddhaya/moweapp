@@ -1,18 +1,5 @@
 <template>
     <div id="single-video">
-        
-        <!-- <div class="plyr__video-embed" id="player">
-            <iframe :src="post.video_url" allowfullscreen allowtransparency allow="autoplay" fullscreen></iframe>
-        </div> -->
-<!-- <vue-plyr>
-  <div class="plyr__video-embed">
-    <iframe
-      :src="post.video_url"
-      allowfullscreen allowtransparency allow="autoplay">
-    </iframe>
-  </div>
-</vue-plyr> -->
-
 <!-- youtube div element -->
 <vue-plyr>
   <div data-plyr-provider="youtube" :data-plyr-embed-id="video_id"></div>
@@ -24,7 +11,7 @@
                     <v-card-title primary-title>
                         <div class="headline">{{post_title}} </div>
                     </v-card-title>
-                    <p class="body-1 body-text">{{post_description}}</p>
+                    <p class="subheading body-text"><span v-html="post_description"></span></p>
                 </v-card>
             </v-flex>
         </v-layout>
