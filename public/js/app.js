@@ -61284,6 +61284,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -61347,81 +61349,83 @@ var render = function() {
       _c(
         "v-layout",
         { attrs: { row: "", wrap: "", "justify-space-around": "" } },
-        [
-          _vm.loading ? _c("spiner-basic") : _vm._e(),
-          _vm._v(" "),
-          _vm._l(_vm.posts, function(post) {
-            return !_vm.loading
-              ? _c(
-                  "v-flex",
-                  { key: post.id, attrs: { xs12: "", sm5: "", "pt-3": "" } },
-                  [
-                    _c("v-hover", {
-                      scopedSlots: _vm._u([
-                        {
-                          key: "default",
-                          fn: function(ref) {
-                            var hover = ref.hover
-                            return _c(
-                              "v-card",
-                              {
-                                class: "elevation-" + (hover ? 12 : 2),
-                                attrs: { ripple: { class: "error--text" } },
-                                nativeOn: {
-                                  click: function($event) {
-                                    _vm.goToLink(post.id)
-                                  }
+        [_vm.loading ? _c("spiner-basic") : _vm._e()],
+        1
+      ),
+      _vm._v(" "),
+      !_vm.loading
+        ? _c(
+            "v-layout",
+            { attrs: { row: "", wrap: "", "justify-space-around": "" } },
+            _vm._l(_vm.posts, function(post) {
+              return _c(
+                "v-flex",
+                { key: post.id, attrs: { xs12: "", sm5: "", "pt-3": "" } },
+                [
+                  _c("v-hover", {
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(ref) {
+                          var hover = ref.hover
+                          return _c(
+                            "v-card",
+                            {
+                              class: "elevation-" + (hover ? 12 : 2),
+                              attrs: { ripple: { class: "error--text" } },
+                              nativeOn: {
+                                click: function($event) {
+                                  _vm.goToLink(post.id)
                                 }
-                              },
-                              [
-                                _c(
-                                  "v-img",
-                                  { attrs: { src: post.image_url } },
-                                  [
-                                    _c(
-                                      "v-layout",
-                                      {
-                                        attrs: {
-                                          slot: "placeholder",
-                                          "fill-height": "",
-                                          "align-center": "",
-                                          "justify-center": "",
-                                          "ma-0": ""
-                                        },
-                                        slot: "placeholder"
+                              }
+                            },
+                            [
+                              _c(
+                                "v-img",
+                                { attrs: { src: post.image_url } },
+                                [
+                                  _c(
+                                    "v-layout",
+                                    {
+                                      attrs: {
+                                        slot: "placeholder",
+                                        "fill-height": "",
+                                        "align-center": "",
+                                        "justify-center": "",
+                                        "ma-0": ""
                                       },
-                                      [
-                                        _c("v-progress-circular", {
-                                          attrs: {
-                                            indeterminate: "",
-                                            color: _vm.baseColor
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c("p", { staticClass: "subheading" }, [
-                                  _vm._v(_vm._s(post.post_title))
-                                ])
-                              ],
-                              1
-                            )
-                          }
+                                      slot: "placeholder"
+                                    },
+                                    [
+                                      _c("v-progress-circular", {
+                                        attrs: {
+                                          indeterminate: "",
+                                          color: _vm.baseColor
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c("p", { staticClass: "subheading" }, [
+                                _vm._v(_vm._s(post.post_title))
+                              ])
+                            ],
+                            1
+                          )
                         }
-                      ])
-                    })
-                  ],
-                  1
-                )
-              : _vm._e()
-          })
-        ],
-        2
-      )
+                      }
+                    ])
+                  })
+                ],
+                1
+              )
+            })
+          )
+        : _vm._e()
     ],
     1
   )
@@ -62536,19 +62540,6 @@ exports.push([module.i, "\n#youtube-video-player{\n    padding-bottom: 25px;\n}\
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_store__ = __webpack_require__(4);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //

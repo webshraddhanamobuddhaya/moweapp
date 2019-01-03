@@ -5,34 +5,36 @@
 
         <v-layout row wrap justify-space-around>
             <spiner-basic v-if="loading"></spiner-basic>
+        </v-layout>
+        <v-layout row wrap justify-space-around v-if="!loading">
             <!-- <h2>status: {{statusText}}</h2> -->
-          <v-flex xs12 sm5 pt-3 v-for="post in posts" :key="post.id" v-if="!loading">
+          <v-flex xs12 sm5 pt-3 v-for="post in posts" :key="post.id">
               
-        <v-hover>
-            <v-card
-            slot-scope="{ hover }"
-            :class="`elevation-${hover ? 12 : 2}`"
-            :ripple="{ class: 'error--text' }"
-            @click.native="goToLink(post.id)"
-            >
-                <v-img
-                    :src="post.image_url"
-
+            <v-hover>
+                <v-card
+                slot-scope="{ hover }"
+                :class="`elevation-${hover ? 12 : 2}`"
+                :ripple="{ class: 'error--text' }"
+                @click.native="goToLink(post.id)"
                 >
-                                    <v-layout
-                      slot="placeholder"
-                      fill-height
-                      align-center
-                      justify-center
-                      ma-0
+                    <v-img
+                        :src="post.image_url"
+
                     >
-                      <v-progress-circular indeterminate :color="baseColor"></v-progress-circular>
-                    </v-layout>
-                
-                </v-img>
-              <p class="subheading">{{post.post_title}}</p>
-            </v-card>  
-        </v-hover>
+                                        <v-layout
+                        slot="placeholder"
+                        fill-height
+                        align-center
+                        justify-center
+                        ma-0
+                        >
+                        <v-progress-circular indeterminate :color="baseColor"></v-progress-circular>
+                        </v-layout>
+                    
+                    </v-img>
+                <p class="subheading">{{post.post_title}}</p>
+                </v-card>  
+            </v-hover>
           </v-flex>
 
           
