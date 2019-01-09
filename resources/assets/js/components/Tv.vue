@@ -34,7 +34,7 @@ export default {
 	data(){
 		return {
       videoId: 'lG0Ys-2d4MA',
-      pause: undefined,
+      pause: false,
       playerVars: {
         autoplay: 1
       }
@@ -61,7 +61,7 @@ export default {
 
     }else{
       // Stop Radio
-    store.dispatch("stopRadio");
+    // store.dispatch("stopRadio");
       
     }
 
