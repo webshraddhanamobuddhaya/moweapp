@@ -21,3 +21,5 @@ Route::get('/video/{id}', 'Video\VideoController@video');
 
 Route::get('/live_id', 'Video\LiveStreamController@liveID');
 
+Route::post('/submit', 'Email\EmailController@sendContactUs');
+
