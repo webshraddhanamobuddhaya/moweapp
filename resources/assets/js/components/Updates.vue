@@ -6,7 +6,9 @@
         <v-layout row wrap justify-space-around>
             <spiner-basic v-if="loading"></spiner-basic>
             <!-- <h2>status: {{statusText}}</h2> -->
-          <v-flex xs12 sm5 v-for="post in posts" :key="post.id" v-if="!loading">
+        </v-layout>
+        <v-layout row wrap justify-space-around v-if="!loading">
+          <v-flex xs12 sm5 v-for="post in posts" :key="post.id">
               
         <v-hover>
             <v-card

@@ -61182,6 +61182,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -61245,81 +61247,83 @@ var render = function() {
       _c(
         "v-layout",
         { attrs: { row: "", wrap: "", "justify-space-around": "" } },
-        [
-          _vm.loading ? _c("spiner-basic") : _vm._e(),
-          _vm._v(" "),
-          _vm._l(_vm.posts, function(post) {
-            return !_vm.loading
-              ? _c(
-                  "v-flex",
-                  { key: post.id, attrs: { xs12: "", sm5: "" } },
-                  [
-                    _c("v-hover", {
-                      scopedSlots: _vm._u([
-                        {
-                          key: "default",
-                          fn: function(ref) {
-                            var hover = ref.hover
-                            return _c(
-                              "v-card",
-                              {
-                                class: "elevation-" + (hover ? 12 : 2),
-                                attrs: { ripple: { class: "error--text" } },
-                                nativeOn: {
-                                  click: function($event) {
-                                    _vm.goToLink(post.id)
-                                  }
+        [_vm.loading ? _c("spiner-basic") : _vm._e()],
+        1
+      ),
+      _vm._v(" "),
+      !_vm.loading
+        ? _c(
+            "v-layout",
+            { attrs: { row: "", wrap: "", "justify-space-around": "" } },
+            _vm._l(_vm.posts, function(post) {
+              return _c(
+                "v-flex",
+                { key: post.id, attrs: { xs12: "", sm5: "" } },
+                [
+                  _c("v-hover", {
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(ref) {
+                          var hover = ref.hover
+                          return _c(
+                            "v-card",
+                            {
+                              class: "elevation-" + (hover ? 12 : 2),
+                              attrs: { ripple: { class: "error--text" } },
+                              nativeOn: {
+                                click: function($event) {
+                                  _vm.goToLink(post.id)
                                 }
-                              },
-                              [
-                                _c(
-                                  "v-img",
-                                  { attrs: { src: post.image_url } },
-                                  [
-                                    _c(
-                                      "v-layout",
-                                      {
-                                        attrs: {
-                                          slot: "placeholder",
-                                          "fill-height": "",
-                                          "align-center": "",
-                                          "justify-center": "",
-                                          "ma-0": ""
-                                        },
-                                        slot: "placeholder"
+                              }
+                            },
+                            [
+                              _c(
+                                "v-img",
+                                { attrs: { src: post.image_url } },
+                                [
+                                  _c(
+                                    "v-layout",
+                                    {
+                                      attrs: {
+                                        slot: "placeholder",
+                                        "fill-height": "",
+                                        "align-center": "",
+                                        "justify-center": "",
+                                        "ma-0": ""
                                       },
-                                      [
-                                        _c("v-progress-circular", {
-                                          attrs: {
-                                            indeterminate: "",
-                                            color: _vm.baseColor
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c("p", { staticClass: "body-1" }, [
-                                  _vm._v(_vm._s(post.post_title))
-                                ])
-                              ],
-                              1
-                            )
-                          }
+                                      slot: "placeholder"
+                                    },
+                                    [
+                                      _c("v-progress-circular", {
+                                        attrs: {
+                                          indeterminate: "",
+                                          color: _vm.baseColor
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c("p", { staticClass: "body-1" }, [
+                                _vm._v(_vm._s(post.post_title))
+                              ])
+                            ],
+                            1
+                          )
                         }
-                      ])
-                    })
-                  ],
-                  1
-                )
-              : _vm._e()
-          })
-        ],
-        2
-      )
+                      }
+                    ])
+                  })
+                ],
+                1
+              )
+            })
+          )
+        : _vm._e()
     ],
     1
   )
@@ -61468,7 +61472,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       videoId: 'lG0Ys-2d4MA',
-      pause: undefined,
+      pause: false,
       playerVars: {
         autoplay: 1
       }
@@ -61495,7 +61499,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     } else {
       // Stop Radio
-      __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].dispatch("stopRadio");
+      // store.dispatch("stopRadio");
+
     }
   },
 
@@ -62077,7 +62082,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n#message-card{\n    padding:15px;\n    padding-bottom:50px;\n    margin-bottom: 200px;\n}\n", ""]);
+exports.push([module.i, "\n#message-card {\n  padding: 15px;\n  padding-bottom: 50px;\n  margin-bottom: 200px;\n}\n", ""]);
 
 // exports
 
@@ -62121,23 +62126,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -62145,41 +62133,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       valid: true,
-      name: '',
+      name: "",
       nameRules: [function (v) {
-        return !!v || 'Name is required';
+        return !!v || "Name is required";
       }, function (v) {
-        return v && v.length <= 10 || 'Name must be less than 10 characters';
+        return v && v.length <= 10 || "Name must be less than 10 characters";
       }],
-      email: '',
+      email: "",
       emailRules: [function (v) {
-        return !!v || 'E-mail is required';
+        return !!v || "E-mail is required";
       }, function (v) {
-        return (/.+@.+/.test(v) || 'E-mail must be valid'
+        return (/.+@.+/.test(v) || "E-mail must be valid"
         );
       }],
-      subject: '',
+      subject: "",
       subjectRules: [function (v) {
-        return !!v || 'Subject is required';
+        return !!v || "Subject is required";
       }, function (v) {
-        return v && v.length <= 50 || 'Name must be less than 50 characters';
+        return v && v.length <= 50 || "Name must be less than 50 characters";
       }],
-      message: '',
+      message: "",
       messageRules: [function (v) {
-        return !!v || 'Message is required';
+        return !!v || "Message is required";
       }]
-
     };
   },
   created: function created() {
-    __WEBPACK_IMPORTED_MODULE_1__store_store__["a" /* default */].dispatch("setNavTitle", 'Send Your Message');
+    __WEBPACK_IMPORTED_MODULE_1__store_store__["a" /* default */].dispatch("setNavTitle", "Send Your Message");
   },
 
   methods: {
     submit: function submit() {
       if (this.$refs.form.validate()) {
         // Native form submission is not yet supported
-        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/api/submit', {
+        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post("/api/submit", {
           name: this.name,
           email: this.email,
           select: this.select,
@@ -62286,7 +62273,7 @@ var render = function() {
               _c(
                 "v-btn",
                 { attrs: { disabled: !_vm.valid }, on: { click: _vm.submit } },
-                [_vm._v("\n            submit\n        ")]
+                [_vm._v("submit")]
               ),
               _vm._v(" "),
               _c("v-btn", { on: { click: _vm.clear } }, [_vm._v("clear")])
