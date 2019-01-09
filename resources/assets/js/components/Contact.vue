@@ -21,7 +21,7 @@
           required
         ></v-textarea>
 
-        <v-btn :disabled="!valid" @click="submit">submit</v-btn>
+        <v-btn :loading="loading" :disabled="!valid" @click="submit">submit</v-btn>
         <v-btn @click="clear">clear</v-btn>
       </v-form>
     </v-card>
@@ -31,8 +31,10 @@
 <script>
 import axios from "axios";
 import store from "../store/store";
+
 export default {
   data: () => ({
+    loading: false,
     valid: true,
     name: "",
     nameRules: [
@@ -55,22 +57,40 @@ export default {
   created() {
     store.dispatch("setNavTitle", "Send Your Message");
   },
+  watch: {
+    loading(){
+
+    }
+  },
   methods: {
     submit() {
       if (this.$refs.form.validate()) {
         // Native form submission is not yet supported
+        this.loading = true;
         axios.post("/api/submit", {
           name: this.name,
           email: this.email,
           subject: this.subject,
           text: this.message
         }).then(response => {
+          this.clear();
+          this.loading = false;
+          this.showAlert();
           console.log(response)
         });
       }
     },
     clear() {
       this.$refs.form.reset();
+    },
+    showAlert(){
+          Swal({
+            // position: 'top-end',
+            type: 'success',
+            title: 'Your work has been saved',
+            showConfirmButton: false,
+            timer: 1500
+          })
     }
   }
 };
