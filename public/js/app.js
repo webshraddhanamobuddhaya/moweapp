@@ -62124,6 +62124,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -62132,6 +62141,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       loading: false,
+      hasErrors: false,
+      errors: [],
       valid: true,
       name: "",
       nameRules: [function (v) {
@@ -62172,29 +62183,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (this.$refs.form.validate()) {
         // Native form submission is not yet supported
         this.loading = true;
+        this.hasErrors = false;
         __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post("/api/submit", {
           name: this.name,
           email: this.email,
           subject: this.subject,
           text: this.message
         }).then(function (response) {
-          _this.clear();
           _this.loading = false;
-          _this.showAlert();
-          console.log(response);
+          if (response.data.success) {
+            _this.clear();
+
+            _this.showAlert('success', response.data.message);
+          } else {
+            _this.showAlert('error', response.data.message);
+            _this.hasErrors = true;
+            _this.errors = response.data.errors;
+          }
+          console.log(response.data);
         });
       }
     },
     clear: function clear() {
       this.$refs.form.reset();
+      this.loading = false;
     },
-    showAlert: function showAlert() {
-      Swal({
+    showAlert: function showAlert(type, message) {
+      this.$swal({
         // position: 'top-end',
-        type: 'success',
-        title: 'Your work has been saved',
+        type: type,
+        title: message,
         showConfirmButton: false,
-        timer: 1500
+        timer: 1800
       });
     }
   }
@@ -62290,18 +62310,34 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
+              _vm._l(_vm.errors, function(error) {
+                return _c(
+                  "v-alert",
+                  {
+                    key: error,
+                    attrs: {
+                      value: _vm.hasErrors,
+                      color: "error",
+                      icon: "warning",
+                      outline: ""
+                    }
+                  },
+                  [_vm._v("\n        " + _vm._s(error) + "\n      ")]
+                )
+              }),
+              _vm._v(" "),
               _c(
                 "v-btn",
                 {
                   attrs: { loading: _vm.loading, disabled: !_vm.valid },
                   on: { click: _vm.submit }
                 },
-                [_vm._v("submit")]
+                [_vm._v("Submit")]
               ),
               _vm._v(" "),
-              _c("v-btn", { on: { click: _vm.clear } }, [_vm._v("clear")])
+              _c("v-btn", { on: { click: _vm.clear } }, [_vm._v("Reset")])
             ],
-            1
+            2
           )
         ],
         1
