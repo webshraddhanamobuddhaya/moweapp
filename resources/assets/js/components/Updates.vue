@@ -1,47 +1,49 @@
 <template>
-  <div
-    id="e3"
-  >
-
+    <div id="e3">
+        <!-- Show spiner -->
         <v-layout row wrap justify-space-around>
             <spiner-basic v-if="loading"></spiner-basic>
-            <!-- <h2>status: {{statusText}}</h2> -->
         </v-layout>
+        <!-- Load content -->
         <v-layout row wrap justify-space-around v-if="!loading">
-          <v-flex xs12 sm5 v-for="post in posts" :key="post.id">
-              
-        <v-hover>
-            <v-card
-            slot-scope="{ hover }"
-            :class="`elevation-${hover ? 12 : 2}`"
-            :ripple="{ class: 'error--text' }"
-            @click.native="goToLink(post.id)"
-            >
-                <v-img
-                    :src="post.image_url"
+            <v-flex xs12 sm6>
+            <news-carousel></news-carousel>
+            <v-spacer>
+                <p class="caption">
+                    <v-icon class="body-1" color="red">notification_important</v-icon> Latest News
+                </p>
+            </v-spacer>
+            </v-flex>
+            <v-flex xs12 py-3>
+                <p class="title"><v-icon>update</v-icon> Updates</p>
+                <v-divider></v-divider>
 
+            </v-flex>
+            <v-flex xs12 sm5 v-for="post in posts" :key="post.id">             
+            <v-hover>
+                <v-card
+                    slot-scope="{ hover }"
+                    :class="`elevation-${hover ? 12 : 2}`"
+                    :ripple="{ class: 'error--text' }"
+                    @click.native="goToLink(post.id)"
                 >
-                                    <v-layout
-                      slot="placeholder"
-                      fill-height
-                      align-center
-                      justify-center
-                      ma-0
-                    >
-                      <v-progress-circular indeterminate :color="baseColor"></v-progress-circular>
-                    </v-layout>
-                
-                </v-img>
-              <p class="body-1">{{post.post_title}}</p>
-            </v-card>  
-        </v-hover>
-          </v-flex>
-
-          
+                    <v-img :src="post.image_url">
+                        <v-layout
+                            slot="placeholder"
+                            fill-height
+                            align-center
+                            justify-center
+                            ma-0
+                        >
+                        <v-progress-circular indeterminate :color="baseColor"></v-progress-circular>
+                        </v-layout>
+                    </v-img>
+                <p class="body-1">{{post.post_title}}</p>
+                </v-card>  
+            </v-hover>
+            </v-flex>  
         </v-layout>
-      <!-- </v-container> -->
-    <!-- </v-card> -->
-  </div>
+    </div>
 </template>
 <script>
 import store from "../store/store";
@@ -53,7 +55,6 @@ export default {
     },
     created(){
         store.dispatch("getApiData");
-        store.dispatch("setNavTitle",'Latest Videos');
     },
 
     methods: {

@@ -10,7 +10,7 @@
                 <v-btn
                   :color="baseColor"
                   flat
-                  to="/"
+                  to="/update"
                 >
                   <span>Updates</span>
                   <v-icon>update</v-icon>

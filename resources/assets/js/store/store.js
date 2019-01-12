@@ -18,11 +18,44 @@ export default new Vuex.Store({
         radio_volume: .6,
         radioPlaying: false,
         radio: undefined,
+        newsFeed:[],
+        loadingNewsFeed: true,
     },
     getters: {
-
+        getAllnews(state){
+            return state.newsFeed;
+        },
+        getLoadingNewsFeedValue(state){
+            return state.loadingNewsFeed;
+        },
+        getloading(state){
+            return state.loading;
+        }
     },
     actions: {
+        // NewsFeed Actions
+        getNewsFeedFromApi({commit,state}){
+            if (state.newsFeed.length == 0) {
+                commit('setloadingNewsFeed',true);
+                console.log('no data in newsfeed');
+                return new Promise((resolve, reject) => {
+                    axios.get('/api/newsfeed').then(response => {
+                        // http success, call the mutator and change something in state
+                        console.log(response.data);
+                        commit('setNewsFeedData', response.data);
+                        commit('setloadingNewsFeed',false);
+    
+                        // commit("stopLoading");
+    
+                        resolve(response); // Let the calling function know that http is done. You may send some data back
+                    }, error => {
+                        // http failed, let the calling function know that action did not work out
+                        reject(error);
+                    })
+                })
+            }
+        },
+        //
         changeRadioVolume({state,commit}, value){
             state.radio.volume = value;
             commit("changeRadioVolume",value);
@@ -93,6 +126,7 @@ export default new Vuex.Store({
              if (state.updates.length==0) {
                  commit("startLoading");
                  axios.get('/api/videos').then((response) => {
+                     console.log(response.data);
                      commit("setApiData",response.data);
                      commit("stopLoading");
 
@@ -130,6 +164,15 @@ export default new Vuex.Store({
         }
     },
     mutations: {
+        // News Feed
+        setloadingNewsFeed(state, value){
+            state.loadingNewsFeed = value;
+        },
+        setNewsFeedData(state,apiData){
+            state.newsFeed = apiData;
+        },
+
+        //
         changeRadioVolume(state,value){
             state.radio_volume = value;
         },

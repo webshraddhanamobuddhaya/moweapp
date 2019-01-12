@@ -20,7 +20,8 @@ import VueYouTubeEmbed from 'vue-youtube-embed';
 import VueYoutube from 'vue-youtube'
 import VueSweetalert2 from 'vue-sweetalert2';
 
-
+//import style
+import 'vuetify/dist/vuetify.min.css';
 
 // Import Vuex
 import store from './store/store'
@@ -40,6 +41,11 @@ let routes = [
 
     {
         path: '/',
+        component: require('./components/News.vue')
+        // component: require('./components/Loading.vue')
+    },
+    {
+        path: '/update',
         component: require('./components/Updates.vue')
         // component: require('./components/Loading.vue')
     },
@@ -84,6 +90,7 @@ Vue.component('app-header', require('./components/structure/HeaderNav.vue'));
 Vue.component('base-app', require('./components/structure/BaseApp.vue'));
 Vue.component('footer-nav', require('./components/structure/FooterNav.vue'));
 Vue.component('spiner-basic', require('./components/enhansments/Spiner.vue'));
+Vue.component('news-carousel', require('./components/subcompornents/NewsCarousel.vue'));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
