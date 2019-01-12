@@ -64,6 +64,10 @@ let routes = [
     {
         path: '/post/:id',
         component: require('./components/SingleVideo.vue')
+    },
+    {
+        path: '/news/:id',
+        component: require('./components/SingleNews.vue')
     }
 ]
 

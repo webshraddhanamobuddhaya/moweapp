@@ -20,6 +20,8 @@ export default new Vuex.Store({
         radio: undefined,
         newsFeed:[],
         loadingNewsFeed: true,
+        singleNewsLoading: false,
+        singleNewsData:[]
     },
     getters: {
         getAllnews(state){
@@ -34,6 +36,31 @@ export default new Vuex.Store({
     },
     actions: {
         // NewsFeed Actions
+        getSingleNewsData(context, news_id) {
+            context.commit('singleNewsLoading', true);
+            return new Promise((resolve, reject) => {
+                // Do something here... lets say, a http call using vue-resource
+                let postUrl = '/api/video/' + news_id;
+                axios.get(postUrl).then(response => {
+                    // http success, call the mutator and change something in state
+                    let video_id = response.data.video_url.replace('https://www.youtube.com/embed/', '');
+                    let postData = {
+                        post_id: news_id,
+                        image: response.data.image_url,
+                        post_title: response.data.post_title,
+                        description: response.data.description,
+                        video_id: video_id
+                    };
+                    context.commit('setSingleNewsData', postData);
+                    context.commit('singleNewsLoading', false);
+
+                    resolve(response); // Let the calling function know that http is done. You may send some data back
+                }, error => {
+                    // http failed, let the calling function know that action did not work out
+                    reject(error);
+                })
+            })
+        },
         getNewsFeedFromApi({commit,state}){
             if (state.newsFeed.length == 0) {
                 commit('setloadingNewsFeed',true);
@@ -165,6 +192,12 @@ export default new Vuex.Store({
     },
     mutations: {
         // News Feed
+        setSingleNewsData(state,data){
+            state.singleNewsData = data;
+        },
+        singleNewsLoading(state,value){
+            state.singleNewsLoading = value;
+        },
         setloadingNewsFeed(state, value){
             state.loadingNewsFeed = value;
         },

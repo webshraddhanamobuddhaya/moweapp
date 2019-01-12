@@ -20,7 +20,7 @@
                 <p class="subheading">{{news.post_title}}</p>
                 <!-- <p class="subheading">ඔබත් එක්වන්න</p> -->
                 
-                <v-btn small class="news-button" absolute>Details <v-icon right dark>navigate_next</v-icon> </v-btn>
+                <v-btn @click="goToNews(news.id)" small class="news-button" absolute>Details <v-icon right dark>navigate_next</v-icon> </v-btn>
 
             </v-flex>
         </v-layout>
@@ -50,12 +50,25 @@ export default {
             
             }
         },
+        goToNews(newsId){
+            console.log(newsId);
+                this.$router.push('/news/'+newsId);
+            store.dispatch("getSingleNewsData",newsId).then(response => {
+                console.log("Got some data, now lets show something in this component")
+
+                // Stop the radio
+                // store.dispatch("stopRadio");
+            }, error => {
+                console.error("Got nothing from server. Prompt user to check internet connection and try again")
+            });
+        }
+        
     },
     computed:{
         baseColor(){
             return this.$store.state.baseColor;
         }
-    },
+    }
 }
 </script>
 <style>
@@ -69,7 +82,7 @@ export default {
 .news-button {
     position: absolute;
     bottom: 0;
-    right: 0;
+    right: 5%;
 }
 
 </style>

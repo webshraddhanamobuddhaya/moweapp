@@ -11,7 +11,7 @@
                 <v-divider></v-divider>
 
             </v-flex>
-            <v-flex xs12 sm5 v-for="news in newsFeed" :key="news.id" pb-2>             
+            <v-flex xs12 sm7 v-for="news in newsFeed" :key="news.id" pb-2>             
 
                 <news-feed-single :news="news"></news-feed-single>
 

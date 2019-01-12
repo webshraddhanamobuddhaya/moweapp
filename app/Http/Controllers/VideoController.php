@@ -28,7 +28,7 @@ class VideoController extends Controller
     }
 
     public function video($id){
-        $url = "https://www.shraddha.lk/stvapi/public/video/$id";
+        $url = "https://www.shraddha.lk/stvapi/public/post/$id";
 
         $client = new \GuzzleHttp\Client();
         $request = $client->get($url);
