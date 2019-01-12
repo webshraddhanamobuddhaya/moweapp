@@ -19,7 +19,7 @@
 </vue-plyr>
 
         <v-layout row wrap>
-            <v-flex xs12>
+            <v-flex xs12 pt-2>
                 <v-card>
                     <v-card-title primary-title>
                         <div class="headline">{{post_title}} </div>

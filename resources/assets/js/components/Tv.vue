@@ -17,12 +17,22 @@
               <vue-plyr >
                 <div data-plyr-provider="youtube" :data-plyr-embed-id="video_id"></div>
               </vue-plyr>
+            </v-flex>
+            <v-flex xs12 pb-3>
               <v-card id="add-card">
-                    <img src="/images/shraddha_tv.jpg" alt="Vuetify.js" id="shraddha_tv-logo">
+                    <img src="/images/shraddha_tv.png" height="100" alt="Vuetify.js" id="shraddha_tv-logo">
                 <div >
                 </div>
               </v-card>
 <!-- <youtube :video-id="videoId" :player-vars="playerVars" @playing="playing"></youtube> -->
+            </v-flex>
+            <v-flex xs12 sm6 offset-sm3>
+              <news-carousel></news-carousel>
+                <v-spacer>
+                    <p class="caption">
+                        <v-icon class="body-1" color="red">notification_important</v-icon> Latest News
+                    </p>
+                </v-spacer>
             </v-flex>
 </v-layout>
 </div>

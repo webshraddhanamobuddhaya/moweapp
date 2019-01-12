@@ -23,3 +23,7 @@ Route::get('/live_id', 'Video\LiveStreamController@liveID');
 
 Route::post('/submit', 'Email\EmailController@sendContactUs');
 
+
+// get newsFeed result
+Route::get('/newsfeed', 'NewsFeed\NewsFeedController@getNewsFeed');
+

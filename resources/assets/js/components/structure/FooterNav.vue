@@ -7,10 +7,18 @@
                 color="white"
                 fixed
               >
-                <v-btn
+                <!-- <v-btn
                   :color="baseColor"
                   flat
                   to="/"
+                >
+                  <span>News</span>
+                  <v-icon>notification_important</v-icon>
+                </v-btn> -->
+                <v-btn
+                  :color="baseColor"
+                  flat
+                  to="/update"
                 >
                   <span>Updates</span>
                   <v-icon>update</v-icon>
