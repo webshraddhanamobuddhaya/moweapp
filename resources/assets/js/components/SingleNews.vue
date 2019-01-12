@@ -25,7 +25,7 @@
             </v-flex>
             <v-flex xs12>
                 <v-card>
-                    <div v-html="content" class="body-1">
+                    <div v-html="content" class="body-1 body-text">
                         <!-- {{content}} -->
                     </div>
                 </v-card>
