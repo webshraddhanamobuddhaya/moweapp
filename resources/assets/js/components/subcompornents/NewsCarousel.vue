@@ -1,6 +1,7 @@
 <template>
     <v-content>
-        <v-carousel
+        <p v-if="newsFeedisEmpty">News feed empty</p>
+        <v-carousel v-if="!newsFeedisEmpty" 
         hide-delimiters
         prev-icon="mdi-arrow-left"
         next-icon="mdi-arrow-right"
@@ -31,10 +32,22 @@ export default {
           console.log(store.state.newsFeed);
             return store.state.newsFeed;
         },
+        newsFeedisEmpty(){
+            return store.state.newsFeedisEmpty;
+        }
     },
     created(){
         console.log('carousel created');
         store.dispatch("getNewsFeedFromApi");
+    },
+    methods: {
+        isEmptyNews(){
+            if(store.state.newsFeed.length==0){
+                return true;
+            }else {
+                return false;
+            }
+        }
     }
 }
 </script>

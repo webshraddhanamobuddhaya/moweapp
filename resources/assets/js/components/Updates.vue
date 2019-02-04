@@ -19,7 +19,8 @@
                 <v-divider></v-divider>
 
             </v-flex>
-            <v-flex xs12 sm5 v-for="post in posts" :key="post.id">             
+
+            <v-flex xs12 v-for="post in posts" :key="post.id">             
             <v-hover>
                 <v-card
                     slot-scope="{ hover }"
@@ -27,18 +28,21 @@
                     :ripple="{ class: 'error--text' }"
                     @click.native="goToLink(post.id)"
                 >
-                    <v-img :src="post.image_url">
-                        <v-layout
-                            slot="placeholder"
-                            fill-height
-                            align-center
-                            justify-center
-                            ma-0
-                        >
-                        <v-progress-circular indeterminate :color="baseColor"></v-progress-circular>
-                        </v-layout>
-                    </v-img>
-                <p class="body-1">{{post.post_title}}</p>
+
+                        <v-img :src="post.image_url">
+                            <v-layout
+                                slot="placeholder"
+                                fill-height
+                                align-center
+                                justify-center
+                                ma-0
+                            >
+                            <v-progress-circular indeterminate :color="baseColor"></v-progress-circular>
+                            </v-layout>
+                        </v-img>
+
+                        <p class="body-1">{{post.post_title}}</p>
+      
                 </v-card>  
             </v-hover>
             </v-flex>  
