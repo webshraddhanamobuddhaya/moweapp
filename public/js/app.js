@@ -513,10 +513,11 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
         radio_volume: .6,
         radioPlaying: false,
         radio: undefined,
-        newsFeed: [],
+        newsFeed: undefined,
         loadingNewsFeed: true,
         singleNewsLoading: false,
-        singleNewsData: []
+        singleNewsData: [],
+        newsFeedisEmpty: false
     },
     getters: {
         getAllnews: function getAllnews(state) {
@@ -560,7 +561,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
             var commit = _ref.commit,
                 state = _ref.state;
 
-            if (state.newsFeed.length == 0) {
+            if (state.newsFeed == undefined) {
                 commit('setloadingNewsFeed', true);
                 console.log('no data in newsfeed');
                 return new Promise(function (resolve, reject) {
@@ -578,6 +579,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
                         reject(error);
                     });
                 });
+            }
+            if (state.newsFeed.length == 0) {
+                commit('newsFeedisEmpty');
             }
         },
 
@@ -705,6 +709,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
     },
     mutations: {
         // News Feed
+        newsFeedisEmpty: function newsFeedisEmpty(state) {
+            state.newsFeedisEmpty = true;
+        },
         setSingleNewsData: function setSingleNewsData(state, data) {
             state.singleNewsData = data;
         },
@@ -61379,6 +61386,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -61445,7 +61454,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n#news-page{\n    margin-bottom: 50px;\n    /* background: transparent; */\n}\n.news-infomaion{\n    position: relative;\n}\n.news-button {\n    position: absolute;\n    bottom: 0;\n    right: 5%;\n}\n\n", ""]);
+exports.push([module.i, "\n#news-page{\n    margin-bottom: 50px;\n    /* background: transparent; */\n}\n.news-infomaion{\n    position: relative;\n}\n.news-button {\n    position: absolute;\n    bottom: 0;\n    right: 5%;\n}\n.newsfeed-date-time{\n    font-size: 12px;\n    margin-top: -15px;\n    color: black;\n    /* background-color: rgba(255, 255, 255, .6); */\n    padding: 5px;\n}\n.news-date-line-height{\n    line-height: 1;\n}\n\n", ""]);
 
 // exports
 
@@ -61518,6 +61527,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -61557,6 +61572,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     computed: {
         baseColor: function baseColor() {
             return this.$store.state.baseColor;
+        },
+        newsFeedisEmpty: function newsFeedisEmpty() {
+            return __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].state.newsFeedisEmpty;
         }
     }
 });
@@ -61618,6 +61636,18 @@ var render = function() {
               _c("p", { staticClass: "subheading" }, [
                 _vm._v(_vm._s(_vm.news.post_title))
               ]),
+              _vm._v(" "),
+              _vm.news.tags.length
+                ? _c("div", { staticClass: "newsfeed-date-time" }, [
+                    _c("p", { staticClass: "news-date-line-height" }, [
+                      _vm._v(_vm._s(_vm.news.tags[0]))
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "news-date-line-height" }, [
+                      _vm._v(" " + _vm._s(_vm.news.tags[1]))
+                    ])
+                  ])
+                : _vm._e(),
               _vm._v(" "),
               _c(
                 "v-btn",
@@ -61874,6 +61904,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -61989,7 +62023,7 @@ var render = function() {
               _vm._l(_vm.posts, function(post) {
                 return _c(
                   "v-flex",
-                  { key: post.id, attrs: { xs12: "", sm5: "" } },
+                  { key: post.id, attrs: { xs12: "" } },
                   [
                     _c("v-hover", {
                       scopedSlots: _vm._u([
@@ -63342,6 +63376,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -63406,9 +63441,10 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("p", { staticClass: "body-1 body-text" }, [
-                    _vm._v(_vm._s(_vm.post_description))
-                  ])
+                  _c("p", {
+                    staticClass: "body-1 body-text",
+                    domProps: { innerHTML: _vm._s(_vm.post_description) }
+                  })
                 ],
                 1
               )
@@ -63518,7 +63554,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n#youtube-video-player{\n    padding-bottom: 25px;\n}\n.body-text{\n    text-align: justify;\n    line-height: 1.6;\n    padding: 10px;\n    margin-bottom: 50px;\n}\n#single-news{\n    padding-bottom: 50px;\n}\n\n", ""]);
+exports.push([module.i, "\n#youtube-video-player{\n    padding-bottom: 25px;\n}\n.body-text{\n    text-align: justify;\n    line-height: 1.6;\n    padding: 10px;\n    /* margin-bottom: 100px; */\n}\n#single-news{\n    padding-bottom: 50px;\n}\n.total-body{\n    margin-bottom: 50px;\n}\n.card-bottom{\n    margin-bottom: 15px;\n}\n\n", ""]);
 
 // exports
 
@@ -63581,9 +63617,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
+// import NewsFeedSingle from './subcompornents/NewsFeedSingle.vue';
 /* harmony default export */ __webpack_exports__["default"] = ({
+    // components: {
+    //     'news-feed-single': NewsFeedSingle
+    // },
 
     computed: {
         singleNewsLoading: function singleNewsLoading() {
@@ -63600,14 +63651,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         content: function content() {
             return __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].state.singleNewsData.description;
+        },
+        newsFeed: function newsFeed() {
+            return __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].state.newsFeed;
+        },
+        video_id: function video_id() {
+            return __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].state.singlePost.video_id;
         }
-        // post_description(){
-        //     return store.state.singlePost.description;
-        // },
-        // video_id(){
-        //     return store.state.singlePost.video_id;
-        //  },
-
     },
     created: function created() {
         // store.dispatch("setNavTitle",'Single Video');
@@ -63697,13 +63747,31 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-flex",
-                { attrs: { xs12: "" } },
+                { staticClass: "total-body", attrs: { xs12: "" } },
                 [
-                  _c("v-card", [
+                  _c("v-card", { staticClass: "card-bottom" }, [
                     _c("div", {
                       staticClass: "body-1 body-text",
                       domProps: { innerHTML: _vm._s(_vm.content) }
                     })
+                  ]),
+                  _vm._v(" "),
+                  _c("news-carousel"),
+                  _vm._v(" "),
+                  _c("v-spacer", [
+                    _c(
+                      "p",
+                      { staticClass: "caption" },
+                      [
+                        _c(
+                          "v-icon",
+                          { staticClass: "body-1", attrs: { color: "red" } },
+                          [_vm._v("notification_important")]
+                        ),
+                        _vm._v(" Latest News\n                        ")
+                      ],
+                      1
+                    )
                   ])
                 ],
                 1
@@ -68802,6 +68870,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -68813,11 +68882,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         newsFeed: function newsFeed() {
             console.log(__WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].state.newsFeed);
             return __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].state.newsFeed;
+        },
+        newsFeedisEmpty: function newsFeedisEmpty() {
+            return __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].state.newsFeedisEmpty;
         }
     },
     created: function created() {
         console.log('carousel created');
         __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].dispatch("getNewsFeedFromApi");
+    },
+
+    methods: {
+        isEmptyNews: function isEmptyNews() {
+            if (__WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].state.newsFeed.length == 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 });
 
@@ -68832,26 +68914,30 @@ var render = function() {
   return _c(
     "v-content",
     [
-      _c(
-        "v-carousel",
-        {
-          attrs: {
-            "hide-delimiters": "",
-            "prev-icon": "mdi-arrow-left",
-            "next-icon": "mdi-arrow-right",
-            height: "auto",
-            light: ""
-          }
-        },
-        _vm._l(_vm.newsFeed, function(news, i) {
-          return _c(
-            "v-carousel-item",
-            { key: i },
-            [_c("news-feed-single", { attrs: { news: news } })],
-            1
+      _vm.newsFeedisEmpty ? _c("p", [_vm._v("News feed empty")]) : _vm._e(),
+      _vm._v(" "),
+      !_vm.newsFeedisEmpty
+        ? _c(
+            "v-carousel",
+            {
+              attrs: {
+                "hide-delimiters": "",
+                "prev-icon": "mdi-arrow-left",
+                "next-icon": "mdi-arrow-right",
+                height: "auto",
+                light: ""
+              }
+            },
+            _vm._l(_vm.newsFeed, function(news, i) {
+              return _c(
+                "v-carousel-item",
+                { key: i },
+                [_c("news-feed-single", { attrs: { news: news } })],
+                1
+              )
+            })
           )
-        })
-      )
+        : _vm._e()
     ],
     1
   )

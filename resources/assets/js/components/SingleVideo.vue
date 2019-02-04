@@ -24,7 +24,8 @@
                     <v-card-title primary-title>
                         <div class="headline">{{post_title}} </div>
                     </v-card-title>
-                    <p class="body-1 body-text">{{post_description}}</p>
+                    <!-- <p class="body-1 body-text">{{post_description}}</p> -->
+                    <p v-html="post_description" class="body-1 body-text"></p>
                 </v-card>
             </v-flex>
         </v-layout>

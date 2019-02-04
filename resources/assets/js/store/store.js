@@ -18,10 +18,11 @@ export default new Vuex.Store({
         radio_volume: .6,
         radioPlaying: false,
         radio: undefined,
-        newsFeed:[],
+        newsFeed: undefined,
         loadingNewsFeed: true,
         singleNewsLoading: false,
-        singleNewsData:[]
+        singleNewsData:[],
+        newsFeedisEmpty: false
     },
     getters: {
         getAllnews(state){
@@ -62,7 +63,7 @@ export default new Vuex.Store({
             })
         },
         getNewsFeedFromApi({commit,state}){
-            if (state.newsFeed.length == 0) {
+            if (state.newsFeed == undefined) {
                 commit('setloadingNewsFeed',true);
                 console.log('no data in newsfeed');
                 return new Promise((resolve, reject) => {
@@ -80,6 +81,9 @@ export default new Vuex.Store({
                         reject(error);
                     })
                 })
+            }
+            if(state.newsFeed.length==0){
+                commit('newsFeedisEmpty');
             }
         },
         //
@@ -192,6 +196,9 @@ export default new Vuex.Store({
     },
     mutations: {
         // News Feed
+        newsFeedisEmpty(state){
+            state.newsFeedisEmpty = true;
+        },
         setSingleNewsData(state,data){
             state.singleNewsData = data;
         },

@@ -1,5 +1,6 @@
 <template>
     <v-card :color="backColor(news.news_format)" >
+        <!-- <p v-if="newsFeedisEmpty">News feed empty</p> -->
         <v-layout row wrap pa-2>
             <!-- image -->
             <v-flex xs6>
@@ -18,7 +19,12 @@
             <!-- content -->
             <v-flex xs6 class="white--text news-infomaion" >
                 <p class="subheading">{{news.post_title}}</p>
-                <!-- <p class="subheading">ඔබත් එක්වන්න</p> -->
+
+                <div v-if="news.tags.length" class="newsfeed-date-time"> 
+                    <p class="news-date-line-height">{{news.tags[0]}}</p>
+                    <p class="news-date-line-height"> {{news.tags[1]}}</p>
+                    
+                </div>
                 
                 <v-btn @click="goToNews(news.id)" small class="news-button" absolute>Details <v-icon right dark>navigate_next</v-icon> </v-btn>
 
@@ -61,13 +67,18 @@ export default {
             }, error => {
                 console.error("Got nothing from server. Prompt user to check internet connection and try again")
             });
-        }
+        },
+        
         
     },
     computed:{
         baseColor(){
             return this.$store.state.baseColor;
+        },
+        newsFeedisEmpty(){
+            return store.state.newsFeedisEmpty;
         }
+        
     }
 }
 </script>
@@ -83,6 +94,16 @@ export default {
     position: absolute;
     bottom: 0;
     right: 5%;
+}
+.newsfeed-date-time{
+    font-size: 12px;
+    margin-top: -15px;
+    color: black;
+    /* background-color: rgba(255, 255, 255, .6); */
+    padding: 5px;
+}
+.news-date-line-height{
+    line-height: 1;
 }
 
 </style>

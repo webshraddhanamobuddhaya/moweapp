@@ -6,6 +6,7 @@
         </v-layout>
         <!-- Load content -->
         <v-layout row wrap justify-space-around v-if="!loadingNewsFeed">
+            
             <v-flex xs12 py-3>
                 <p class="title"><v-icon color="red">notification_important</v-icon> Latest News</p>
                 <v-divider></v-divider>
@@ -15,7 +16,8 @@
 
                 <news-feed-single :news="news"></news-feed-single>
 
-            </v-flex>  
+            </v-flex>
+            <!-- <h3>News Feed Empty!</h3> -->
         </v-layout>
     </div>
 </template>
@@ -39,7 +41,7 @@ export default {
     },
 
     methods: {
-
+      
     },
     computed: {
         newsFeed(){
