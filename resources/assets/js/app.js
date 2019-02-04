@@ -16,8 +16,7 @@ import Vuetify from 'vuetify'
 import VueRouter from 'vue-router'
 import VuePlyr from 'vue-plyr';
 import 'vue-plyr/dist/vue-plyr.css';
-import VueYouTubeEmbed from 'vue-youtube-embed';
-import VueYoutube from 'vue-youtube'
+
 import VueSweetalert2 from 'vue-sweetalert2';
 
 //import style
@@ -30,8 +29,6 @@ import store from './store/store'
 
 
 Vue.use(VueSweetalert2);
-Vue.use(VueYoutube)
-Vue.use(VueYouTubeEmbed)
 Vue.use(VuePlyr)
 Vue.use(Vuetify)
 Vue.use(VueRouter)
