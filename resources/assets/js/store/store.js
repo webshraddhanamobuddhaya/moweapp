@@ -137,7 +137,8 @@ export default new Vuex.Store({
                         post_id: post_id,
                         post_title: response.data.post_title,
                         description: response.data.description,
-                        video_id: video_id
+                        video_id: video_id,
+                        video_url: response.data.video_url
 
                     };
                     context.commit('setSingleVideoData', postData);

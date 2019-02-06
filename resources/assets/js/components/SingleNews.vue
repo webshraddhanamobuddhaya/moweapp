@@ -23,7 +23,7 @@
                     </v-card-title>
                 </v-card>
             </v-flex>
-            <v-flex xs12 class="total-body">
+            <v-flex xs12 sm6 offset-sm3 pb-2 class="total-body">
                 <v-card class="card-bottom">
                     <div v-html="content" class="body-1 body-text">
                         <!-- {{content}} -->
@@ -40,6 +40,7 @@
                             <v-icon class="body-1" color="red">notification_important</v-icon> Latest News
                         </p>
                     </v-spacer>
+
 
             </v-flex>
         </v-flex>
