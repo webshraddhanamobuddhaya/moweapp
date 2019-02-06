@@ -6,7 +6,7 @@
         </v-layout>
         <!-- Load content -->
         <v-layout row wrap justify-space-around v-if="!loading">
-            <v-flex xs12 sm6>
+            <v-flex xs12 sm7>
             <news-carousel></news-carousel>
             <v-spacer>
                 <p class="caption">
@@ -20,7 +20,7 @@
 
             </v-flex>
 
-            <v-flex xs12 v-for="post in posts" :key="post.id">             
+            <v-flex xs12 sm7 v-for="post in posts" :key="post.id">             
             <v-hover>
                 <v-card
                     slot-scope="{ hover }"

@@ -103,7 +103,7 @@ export default {
     padding: 5px;
 }
 .news-date-line-height{
-    line-height: 1;
+    line-height: .7;
 }
 
 </style>
