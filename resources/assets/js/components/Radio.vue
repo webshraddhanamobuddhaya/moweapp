@@ -6,7 +6,7 @@
 		</audio>
 		
 		<v-flex xs12 sm6 offset-sm3>
-			<v-card>
+			<v-card class="padding-bottom-set">
 				<div >
 						<img src="/images/lakviru.jpg" alt="Vuetify.js" id="lakviru-logo">
 				</div>
@@ -180,5 +180,8 @@ export default {
     margin-top: -30px;
     padding-bottom: 25px;
 	color: #B0BEC5;
+	}
+	.padding-bottom-set{
+	margin-bottom: 150px;
 	}
 </style>

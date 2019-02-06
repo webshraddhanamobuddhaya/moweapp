@@ -14,13 +14,14 @@
 </vue-plyr> -->
 
 <!-- youtube div element -->
-<vue-plyr>
+<!-- <vue-plyr>
   <div data-plyr-provider="youtube" :data-plyr-embed-id="video_id"></div>
-</vue-plyr>
+</vue-plyr> -->
+<youtube-player-iframe :video_url="video_url"></youtube-player-iframe>
 
         <v-layout row wrap>
             <v-flex xs12 pt-2>
-                <v-card>
+                <v-card class="bottom-margin">
                     <v-card-title primary-title>
                         <div class="headline">{{post_title}} </div>
                     </v-card-title>
@@ -34,8 +35,9 @@
 
 <script>
 import store from "../store/store";
-export default {
 
+export default {
+    
     computed:{
         post_title(){
             return store.state.singlePost.post_title;
@@ -46,6 +48,9 @@ export default {
         video_id(){
             return store.state.singlePost.video_id;
          },
+        video_url(){
+            return store.state.singlePost.video_url;
+         }
 
     },
     created(){
@@ -74,5 +79,9 @@ export default {
     padding: 10px;
     margin-bottom: 50px;
 }
+.bottom-margin{
+    margin-bottom: 100px;
+}
+
 
 </style>

@@ -14,8 +14,8 @@ window.Vue = require('vue');
 // Vuetyfi
 import Vuetify from 'vuetify'
 import VueRouter from 'vue-router'
-import VuePlyr from 'vue-plyr';
-import 'vue-plyr/dist/vue-plyr.css';
+// import VuePlyr from 'vue-plyr';
+// import 'vue-plyr/dist/vue-plyr.css';
 
 import VueSweetalert2 from 'vue-sweetalert2';
 
@@ -29,7 +29,7 @@ import store from './store/store'
 
 
 Vue.use(VueSweetalert2);
-Vue.use(VuePlyr)
+// Vue.use(VuePlyr)
 Vue.use(Vuetify)
 Vue.use(VueRouter)
 
@@ -92,6 +92,7 @@ Vue.component('base-app', require('./components/structure/BaseApp.vue'));
 Vue.component('footer-nav', require('./components/structure/FooterNav.vue'));
 Vue.component('spiner-basic', require('./components/enhansments/Spiner.vue'));
 Vue.component('news-carousel', require('./components/subcompornents/NewsCarousel.vue'));
+Vue.component('youtube-player-iframe', require('./components/subcompornents/YoutubePlayerIframe.vue'));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

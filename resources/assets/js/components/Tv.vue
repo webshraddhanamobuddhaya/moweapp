@@ -14,9 +14,10 @@
 
 <v-layout row wrap v-if="!loading">
             <v-flex xs12>
-              <vue-plyr >
+              <!-- <vue-plyr >
                 <div data-plyr-provider="youtube" :data-plyr-embed-id="video_id"></div>
-              </vue-plyr>
+              </vue-plyr> -->
+            <youtube-player-iframe :video_url="video_url"></youtube-player-iframe>
             </v-flex>
             <v-flex xs12 pb-3>
               <v-card id="add-card">
@@ -26,7 +27,7 @@
               </v-card>
 <!-- <youtube :video-id="videoId" :player-vars="playerVars" @playing="playing"></youtube> -->
             </v-flex>
-            <v-flex xs12 sm6 offset-sm3>
+            <v-flex xs12 sm6 offset-sm3 class="padding-bottom-set">
               <news-carousel></news-carousel>
                 <v-spacer>
                     <p class="caption">
@@ -56,6 +57,10 @@ export default {
     },
     video_id(){
       return store.state.liveStreamId;
+    },
+    video_url(){
+      let id= store.state.liveStreamId;
+      return `https://www.youtube.com/embed/${id}`
     }
   },
   created(){
@@ -94,5 +99,8 @@ iframe {
 	}
 #add-card{
   margin-top: 25px;
+}
+.padding-bottom-set{
+  padding-bottom: 100px;
 }
 </style>
